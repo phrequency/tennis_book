@@ -1,0 +1,33 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$black: #313131;
+$blue: #0C5AA6;
+$lightblue: #1C6CBA;
+
+@font-face {
+    font-family: 'Montreal';
+    src: url('montreal-demibold.ttf'); 
+}
+
+@font-face {
+    font-family: 'Nexa Light';
+    src: url('Nexa Light.otf'); 
+}
+
+@font-face {
+    font-family: 'Nexa Bold';
+    src: url('Nexa Bold.otf'); 
+}
+
+body {
+	font-family: "Nexa Light" !important;
+}
+
+.title{
+	font-size: 35px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}

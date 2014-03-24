@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="title">
+		Results
+	</div>
+	<% @matches.each do |match| %>
+		<div class="row">
+			<div class="col-md-3">
+				<%= match.player.name %>
+			</div>
+			<div class="col-md-3">
+				<%= match.opponent.name %>
+			</div>
+			<div class="col-md-3">
+				<%= match.result %>
+			</div>
+			<div class="col-md-3">
+				<%= match.score %>
+			</div>
+		</div>
+	<% end %>
+</div>

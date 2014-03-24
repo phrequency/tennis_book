@@ -12,6 +12,9 @@ gem 'newrelic_rpm'
 
 gem 'delayed_job_active_record'
 
+gem 'mechanize'
+gem 'nokogiri'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
