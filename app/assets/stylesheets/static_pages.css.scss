@@ -4,8 +4,9 @@
 
 
 $black: #313131;
-$blue: #0C5AA6;
-$lightblue: #1C6CBA;
+$orange: #FF7600;
+$lightorange: #FF9840;
+$green: #00C322;
 
 @font-face {
     font-family: 'Montreal';
@@ -26,8 +27,58 @@ body {
 	font-family: "Nexa Light" !important;
 }
 
-.title{
-	font-size: 35px;
-	margin-top: 40px;
-	margin-bottom: 20px;
+.logo{
+    width: 200px;
+}
+
+.nav {
+    margin-top: 15px !important;
+}
+
+.navbar-toggle {
+    margin-top: 23px !important;   
+}
+
+input[type="text"],input[type="email"],input[type="password"]{
+        height: 40px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: solid 1px #CCC;
+        border-radius: 3px;
+}
+
+textarea {
+    border: solid 1px #CCC;
+    border-radius: 3px;
+}   
+
+button.close {
+    padding: 10px !important;
+}
+
+input[type="submit"]{
+    border: none;
+    padding: 12px 30px;
+    margin: 15px;
+    border-radius: 3px;
+    background: $orange; 
+    color: white;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background: $lightorange;
+}
+
+.devise-title {
+    color: $orange;
+    font-size: 28px;
+    margin: 20px 0px;
+}
+
+.catch-phrase {
+    font-size: 26px;
+    padding: 15px 0px 50px 0px;
+    color: $orange;
+    line-height: 28px;
 }

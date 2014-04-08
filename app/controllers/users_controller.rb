@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 	end
 
 	def get_usta_data
+		unless current_user.player
 		 if params["first_name"] && params["last_name"]
 			a = Mechanize.new
 			first_name = params["first_name"].to_s
@@ -82,7 +83,9 @@ class UsersController < ApplicationController
 				end
 			end
 		 end
+		end
 		redirect_to results_path
+		current_user.delay.get_recommendations
 	end
 
 

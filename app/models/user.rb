@@ -9,5 +9,13 @@ class User < ActiveRecord::Base
   attr_accessible :name
 
   has_one :player
+
+  def get_recommendations
+  	player = self.player
+  	matches = player.all_matches
+  	matches.each do |match|
+  		match.opponent
+  	end
+  end
   
 end

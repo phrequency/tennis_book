@@ -1,3 +1,15 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$black: #313131;
+$orange: #FF7600;
+$lightorange: #FF9840;
+$green: #00C322;
+
+.dash-title {
+	font-size: 18px;
+	padding: 20px 0px 30px 0px;
+	color: $lightorange;
+}
