@@ -6,7 +6,7 @@ TennisBook::Application.routes.draw do
   resources :players
 
 
-  devise_for :users, :skip => [:sessions] 
+  devise_for :users, :skip => [:sessions]
   as :user do
     get 'join' => 'devise/registrations#new', :as => :new_user_registration
     post 'join' => 'devise/registrations#create', :as => :user_registration
@@ -21,7 +21,8 @@ TennisBook::Application.routes.draw do
 
   root :to => 'static_pages#home'
 
-  match '/getdata', :to =>  'users#get_usta_data'
+  # match '/getdata', :to =>  'users#get_usta_data'
+  match '/search_opponent', :to =>  'users#search_opponent'
   get '/dash', :to =>  'users#dash', :as => "dash"
   get '/results', :to =>  'users#results', :as => "results"
 

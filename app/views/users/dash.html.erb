@@ -1,21 +1,23 @@
 <div class="container" align="center">
 	<div class="row">
 		<div class="col-md-6">
+			<a href="<%=results_path%>">
+				<div class="dash-title">
+					See my USTA results
+				</div>
+			</a>
+		</div>
+		<div class="col-md-6">
 			<div class="dash-title">
-				Get my results
+				Search for an opponent
 			</div>
-			<%= form_tag(:action => "get_usta_data", :controller => "users") do %>
+			<%= form_tag(:action => "search_opponent", :controller => "users") do %>
 				<div><%= label_tag :first_name %></div>
 				<div><%= text_field_tag :first_name %></div>
 				<div><%= label_tag :last_name %></div>
 				<div><%= text_field_tag :last_name %></div>
 				<%= submit_tag "Search" %>
 			<% end %>
-		</div>
-		<div class="col-md-6">
-			<div class="dash-title">
-				Search for an opponent
-			</div>
 		</div>
 	</div>
 </div>
