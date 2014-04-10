@@ -1,20 +1,12 @@
-<div class="container">
-	<div class="title">
+<div class="container" align="center">
+	<div class="dash-title">
 		Results
 	</div>
 	<% @matches.each do |match| %>
-		<div class="row">
-			<div class="col-md-3">
-				<%= match.player.name %>
-			</div>
-			<div class="col-md-3">
-				<%= match.opponent.name %>
-			</div>
-			<div class="col-md-3">
-				<%= match.result %>
-			</div>
-			<div class="col-md-3">
-				<%= match.score %>
+		<div class="result-line">
+			You <% if match.result == "Win" %> won <% elsif match.result == "Loss" %> lost <% elsif match.result == "-" %> played <% end %> against <%= match.opponent.name.split(", ").last.capitalize + " " + match.opponent.name.split(", ").first.capitalize %>
+			<div class="score">
+				Score: <%= match.score %>
 			</div>
 		</div>
 	<% end %>

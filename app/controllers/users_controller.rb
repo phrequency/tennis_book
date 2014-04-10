@@ -15,6 +15,27 @@ class UsersController < ApplicationController
 		@matches = @user.player.all_matches
 	end
 
+
+	def search_opponent
+		opp_first_name = params[:first_name].downcase.strip
+		opp_last_name = params[:last_name].downcase.strip
+		redirect_to opponent_results_path(opp_name: opp_first_name + "_" + opp_last_name)
+	end
+
+	def opponent_results
+		opp_first_name = params[:opp_name].split('_').first
+		opp_last_name = params[:opp_name].split('_').last
+		if opp_first_name && opp_last_name
+			opp_search_name = opp_last_name + ", " + opp_first_name
+			@opponent = Player.where(:name => opp_search_name).first
+			if @opponent
+				@own_matches = @opponent.own_matches
+				@other_matches = @opponent.other_matches
+			end
+		end
+	end
+
+
 	# def get_usta_data
 	# 	unless current_user.player
 	# 	 if params["first_name"] && params["last_name"]
@@ -86,11 +107,6 @@ class UsersController < ApplicationController
 	# 	end
 	# 	redirect_to results_path
 	# end
-
-	def search_opponent
-
-	end
-
 
 
 end

@@ -1,0 +1,22 @@
+<div class="container" align="center">
+	<div class="dash-title">
+		<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %>'s Results
+	</div>
+	<% @own_matches.each do |match| %>
+		<div class="result-line">
+			<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> <% if match.result == "Win" %> won <% elsif match.result == "Loss" %> lost <% elsif match.result == "-" %> played <% end %> against <%= match.opponent.name.split(", ").last.capitalize + " " + match.opponent.name.split(", ").first.capitalize %>
+			<div class="score">
+				Score: <%= match.score %>
+			</div>
+		</div>
+	<% end %>
+
+	<% @other_matches.each do |match| %>
+		<div class="result-line">
+			<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> <% if match.result == "Win" %> lost <% elsif match.result == "Loss" %> won <% elsif match.result == "-" %> played <% end %> against <%= match.player.name.split(", ").last.capitalize + " " + match.player.name.split(", ").first.capitalize %>
+			<div class="score">
+				Score: <%= match.score %>
+			</div>
+		</div>
+	<% end %>
+</div>

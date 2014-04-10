@@ -23,6 +23,7 @@ TennisBook::Application.routes.draw do
 
   # match '/getdata', :to =>  'users#get_usta_data'
   match '/search_opponent', :to =>  'users#search_opponent'
+  match '/opponent_results', :to =>  'users#opponent_results'
   get '/dash', :to =>  'users#dash', :as => "dash"
   get '/results', :to =>  'users#results', :as => "results"
 

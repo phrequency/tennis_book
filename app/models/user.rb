@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
       id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0]
 
       unless Player.where(:usta_id => id, :user_id => self.id).first
-        my_player = Player.create(:usta_id => id, :user_id => self.id, :name => last_name.capitalize + ', ' + first_name.capitalize)
+        my_player = Player.create(:usta_id => id, :user_id => self.id, :name => last_name.downcase + ', ' + first_name.downcase)
       end
 
       url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
             unless d[:opponent] == ""
               opponent_usta_id = d[:opponent_usta_id].split("PlayerID=").last.split('")').first
               unless player = Player.where(:usta_id => opponent_usta_id).first
-                player = Player.create(:usta_id => opponent_usta_id, :name => d[:opponent])
+                player = Player.create(:usta_id => opponent_usta_id, :name => d[:opponent].downcase)
               end
               unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score]).first
                 Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score])
