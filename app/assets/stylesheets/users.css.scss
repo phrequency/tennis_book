@@ -7,11 +7,55 @@ $black: #313131;
 $orange: #FF7600;
 $lightorange: #FF9840;
 $green: #00C322;
+$lightgreen: #38E156;
 
 .dash-title {
 	font-size: 18px;
 	padding: 20px 0px 30px 0px;
-	color: $lightorange;
+	color: white;
+	background: $green;
+	padding: 15px;
+	border-radius: 3px;
+}
+
+.profile-info {
+	margin-top: 15px;
+}
+
+.profile-img {
+	padding: 25px 10px;
+	background: #F6F6F6;
+	border-radius: 3px;
+	font-size: 17px;
+	cursor: pointer;
+}
+
+.profile-img img {
+	width: 150px;
+	padding: 15px;	
+}
+
+.opponent-detail-box {
+	padding-top: 30px;
+}
+
+.opponent-details {
+	font-size: 18px;
+}
+
+span.emp {
+	color: $orange;
+	font-size: 20px;
+}
+
+.friend-status {
+	padding: 15px;
+	width: 200px;
+	border-radius: 3px;
+	background: $green;
+	color: white;
+	margin-top: 30px;
+	cursor: pointer;
 }
 
 .result-line  {

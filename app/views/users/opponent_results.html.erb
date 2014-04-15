@@ -1,7 +1,48 @@
 <% if @opponent %>
 	<div class="container" align="center">
 		<div class="dash-title">
-			<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %>'s Results
+			<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> 
+		</div>
+		<div class="profile-info">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="profile-img">
+						<% if @opponent.image %>
+							<img src="<%=@opponent.image%>">
+						<% else %>
+							<img src="/assets/blank_profile.png">
+						<% end %>
+					</div>
+				</div>
+				<div class="col-md-5" align="left">
+					<div class="opponent-detail-box">
+						<div class="opponent-details">
+							Location: <span class="emp"><%= @opponent.location %></span>
+						</div>
+						<div class="opponent-details">
+							Overall Record: <span class="emp"><%= @opponent.overall_record %></span>
+						</div>
+						<div class="opponent-details">
+							Date Range: <span class="emp"><%= @opponent.date_range %></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="friend-status">
+						<% if @opponent.is_registered %>
+							<% if @user.is_a_friend(@opponent.user) %>
+								You are friends!
+							<% elsif @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id).first %>
+								Friend request pending...	
+							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && @user.inverse_friendships.where(friend_id: @user.id).first %>
+								Accept friend request!
+							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id).first %>
+								Request to be friends!
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+			</div>
 		</div>
 		<% @own_matches.each do |match| %>
 			<div class="result-line">

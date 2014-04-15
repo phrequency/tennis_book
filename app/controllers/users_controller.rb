@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 	end
 
 	def opponent_results
+		@user = current_user
 		opp_first_name = params[:opp_name].split('_').first
 		opp_last_name = params[:opp_name].split('_').last
 		if opp_first_name && opp_last_name
@@ -31,6 +32,7 @@ class UsersController < ApplicationController
 			if @opponent
 				@own_matches = @opponent.own_matches
 				@other_matches = @opponent.other_matches
+				@matches_against_me = @opponent.all_matches.where('player1_id = :player_id OR player2_id = :player_id', player_id: current_user.player.id)
 			end
 		end
 	end

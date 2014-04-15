@@ -6,6 +6,9 @@ TennisBook::Application.routes.draw do
   resources :players
 
 
+  resources :friendships
+
+
   devise_for :users, :skip => [:sessions]
   as :user do
     get 'join' => 'devise/registrations#new', :as => :new_user_registration

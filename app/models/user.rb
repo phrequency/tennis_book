@@ -9,8 +9,20 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name
 
   has_one :player
+  
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   after_create :get_usta_data
+
+  def is_a_friend(user)
+    if self.friendships.where(friend_id: user.id).first && self.inverse_friendships.where(friend_id: self.id).first
+      return true
+    end
+  end
 
   def get_usta_data
     unless self.player
