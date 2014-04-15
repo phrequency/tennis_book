@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140408192052) do
+ActiveRecord::Schema.define(:version => 20140415015344) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20140408192052) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "link"
   end
 
   add_index "matches", ["player1_id"], :name => "index_matches_on_player1_id"
@@ -46,8 +47,11 @@ ActiveRecord::Schema.define(:version => 20140408192052) do
     t.string   "name"
     t.string   "usta_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "location"
+    t.string   "overall_record"
+    t.string   "date_range"
   end
 
   add_index "players", ["user_id"], :name => "index_players_on_user_id"

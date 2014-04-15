@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
       page = a.get("https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?FirstName=#{first_name}&MiddleName=&LastName=#{last_name}&Type=Ranking&Year=")
 
-      id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0]
+      id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0].gsub('%2b','+').gsub('%2f','/')
 
       unless Player.where(:usta_id => id, :user_id => self.id).first
         my_player = Player.create(:usta_id => id, :user_id => self.id, :name => last_name.downcase + ', ' + first_name.downcase)
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
         "LastName" => "bari",
         "Type" => "Ranking",
         "__EVENTTARGET" => "ctl00_mainContent_PlayerRecord_UpdatePanel",
-        "__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=8/1/2013&EndDt=3/16/2014&PlayerID=#{id}=="
+        "__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=8/1/2010&EndDt=3/16/2014&PlayerID=#{id}=="
       }
 
       headers = {
@@ -51,7 +51,26 @@ class User < ActiveRecord::Base
 
       page = a.post(url, params, headers)
 
+      info_row = page.search("//div[@class='player_specs']/table/tr")[1]
+      if info_row
+        info_detail = {}
+          [
+            [:date_range, 'td[2]/text()'],
+            [:overall_record, 'td[3]/text()'],
+            [:location, 'td[4]/text()']
+          ].each do |name, xpath|
+            info_detail[name] = info_row.at_xpath(xpath).to_s.strip
+          end
+        my_player.date_range = info_detail[:date_range]
+        my_player.overall_record = info_detail[:overall_record]
+        my_player.location = info_detail[:location]
+        my_player.save
+      end
+
       page.search("//div[@class='CommonTable top-margin']").each do |table|
+        t_id = table.css("span.event_title/a").to_s.split('ViewDraw(').last.split(',').first
+        t_link = "http://tennislink.usta.com/Tournaments/TournamentHome/Tournament.aspx?T=" + t_id
+        t_name = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '').strip
         rows = table.xpath("//tbody/tr")
         details = rows.collect do |row|
           detail = {}
@@ -68,12 +87,13 @@ class User < ActiveRecord::Base
         details.each do |d|
           if d
             unless d[:opponent] == ""
-              opponent_usta_id = d[:opponent_usta_id].split("PlayerID=").last.split('")').first
+              opponent_usta_id = d[:opponent_usta_id].split("PlayerID=").last.split("%3d")[0].gsub('%2b','+').gsub('%2f','/')
               unless player = Player.where(:usta_id => opponent_usta_id).first
                 player = Player.create(:usta_id => opponent_usta_id, :name => d[:opponent].downcase)
+                player.get_other_player_info
               end
               unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score]).first
-                Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score])
+                Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link)
               end
             end
           end
@@ -82,6 +102,7 @@ class User < ActiveRecord::Base
      end
     end
   end
+
 
   handle_asynchronously :get_usta_data
   

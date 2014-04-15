@@ -5,12 +5,14 @@ require 'mechanize'
 
 a = Mechanize.new
 
-first_name = "Lexi"
-last_name = "Bari"
+# first_name = "Lexi"
+# last_name = "Bari"
 
-page = a.get("https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?FirstName=#{first_name}&MiddleName=&LastName=#{last_name}&Type=Ranking&Year=")
+# page = a.get("https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?FirstName=#{first_name}&MiddleName=&LastName=#{last_name}&Type=Ranking&Year=")
 
-puts id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0]
+# puts id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0]
+
+id = 'xhwh1hiXg9IubIpIx+Rikg'
 
 url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
 
@@ -19,7 +21,7 @@ params = {
 	"LastName" => "bari",
 	"Type" => "Ranking",
 	"__EVENTTARGET" => "ctl00_mainContent_PlayerRecord_UpdatePanel",
-	"__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=3/1/2013&EndDt=3/16/2014&PlayerID=#{id}=="
+	"__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=3/1/2007&EndDt=3/16/2014&PlayerID=#{id}=="
 }
 
 headers = {
@@ -36,7 +38,12 @@ headers = {
 
 page = a.post(url, params, headers)
 
+#puts info_row = page.search("//div[@class='player_specs']")
+
 page.search("//div[@class='CommonTable top-margin']").each do |table|
+	# t_link = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '')
+	# t_id = table.css("span.event_title/a").to_s.split('ViewDraw(').last.split(',').first
+	# t_link = "http://tennislink.usta.com/Tournaments/TournamentHome/Tournament.aspx?T=" + t_id
 	rows = table.xpath("//tbody/tr")
 	details = rows.collect do |row|
 		detail = {}
@@ -51,24 +58,45 @@ page.search("//div[@class='CommonTable top-margin']").each do |table|
 		detail
 	end
 	details.each do |d|
-		puts d[:opponent]
+		d[:opponent]
 	end
-	# table.xpath("//tbody/tr").each_with_index do |row, index|
-	# 	unless index == 0
-	# 		row.css('td').each_with_index do |data, index2| 
-	# 			if index2 == 0 && data.content != "Round"
-	# 				round = data.content
-	# 			elsif index2 == 1 && data.content != "Result"
-	# 				puts result = data.content
-	# 			elsif index2 == 2 && data.content != "Opponent"
-	# 				opponent = data.content
-	# 				if opponent_link = data.css("a").first
-	# 					opponent_usta_id = data.css("a").first["href"].split("PlayerID=").last.split('")').first
-	# 				end
-	# 			elsif index2 == 3 && data.content != "Score"
-	# 				score = data.content
-	# 			end
-	# 		end
-	# 	end
-	# end
 end
+
+
+
+# page.search("//div[@class='CommonTable top-margin']").each do |table|
+# 	rows = table.xpath("//tbody/tr")
+# 	details = rows.collect do |row|
+# 		detail = {}
+# 		[
+# 			[:opponent, 'td[3]/a/text()'],
+# 			[:opponent_usta_id, 'td[3]/a'],
+# 			[:result, 'td[2]/text()'],
+# 			[:score, 'td[4]/text()']
+# 		].each do |name, xpath|
+# 			detail[name] = row.at_xpath(xpath).to_s.strip
+# 		end
+# 		detail
+# 	end
+# 	details.each do |d|
+# 		puts d[:opponent]
+# 	end
+# 	# table.xpath("//tbody/tr").each_with_index do |row, index|
+# 	# 	unless index == 0
+# 	# 		row.css('td').each_with_index do |data, index2| 
+# 	# 			if index2 == 0 && data.content != "Round"
+# 	# 				round = data.content
+# 	# 			elsif index2 == 1 && data.content != "Result"
+# 	# 				puts result = data.content
+# 	# 			elsif index2 == 2 && data.content != "Opponent"
+# 	# 				opponent = data.content
+# 	# 				if opponent_link = data.css("a").first
+# 	# 					opponent_usta_id = data.css("a").first["href"].split("PlayerID=").last.split('")').first
+# 	# 				end
+# 	# 			elsif index2 == 3 && data.content != "Score"
+# 	# 				score = data.content
+# 	# 			end
+# 	# 		end
+# 	# 	end
+# 	# end
+# end
