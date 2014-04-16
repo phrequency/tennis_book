@@ -1,23 +1,48 @@
 <div class="container" align="center">
 	<div class="row">
 		<div class="col-md-6">
-			<a href="<%=results_path%>">
-				<div class="dash-title">
-					See my USTA results
-				</div>
-			</a>
+			<div class="section-box">
+				<a href="<%=results_path%>">
+					<div class="section-title">
+						My Results & Rankings
+					</div>
+				</a>
+			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="dash-title">
-				Search for an opponent
+			<div class="section-box">
+				<a href="">
+					<div class="section-title">
+						My Player Profile
+					</div>
+				</a>
 			</div>
-			<%= form_tag(:action => "search_opponent", :controller => "users") do %>
-				<div><%= label_tag :first_name %></div>
-				<div><%= text_field_tag :first_name %></div>
-				<div><%= label_tag :last_name %></div>
-				<div><%= text_field_tag :last_name %></div>
-				<%= submit_tag "Search" %>
-			<% end %>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="section-box">
+				<div class="section-title">
+					Search a Player
+				</div>
+				<%= form_tag(:action => "search_opponent", :controller => "users") do %>
+					<div><%= label_tag :first_name %></div>
+					<div><%= text_field_tag :first_name %></div>
+					<div><%= label_tag :last_name %></div>
+					<div><%= text_field_tag :last_name %></div>
+						<%= submit_tag "Search" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="section-box">
+				<a href="<%=my_friends_path%>">
+					<div class="section-title">
+						My Friends & Requests
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	
 </div>
