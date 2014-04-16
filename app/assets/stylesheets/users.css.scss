@@ -9,6 +9,10 @@ $lightorange: #FF9840;
 $green: #00C322;
 $lightgreen: #38E156;
 
+.info-row {
+	padding-bottom: 20px;
+}
+
 .dash-title {
 	font-size: 18px;
 	padding: 20px 0px 30px 0px;
@@ -43,12 +47,19 @@ $lightgreen: #38E156;
 	font-size: 18px;
 }
 
-span.emp {
+.emp {
 	color: $orange;
 	font-size: 20px;
 }
 
 .friend-status {
+	padding: 15px;
+	color: $green;
+	margin-top: 30px;
+	font-size: 18px;
+}
+
+.friend-status-button {
 	padding: 15px;
 	width: 200px;
 	border-radius: 3px;
@@ -58,6 +69,32 @@ span.emp {
 	cursor: pointer;
 }
 
-.result-line  {
-	padding: 15px 0px;
+.sub-dash-title {
+	font-size: 16px;
+	padding: 7px;
+	color: white;
+	background: $green;
+	border-radius: 3px;
+	margin-bottom: 15px;	
+}
+
+.opp-prof {
+	width: 120px;
+	padding: 15px;
+	background: #F6F6F6;
+	border-radius: 3px;
+}
+
+.opp-row {
+	margin: 15px 0px;
+}
+
+.opp-info {
+	font-size: 18px;
+	line-height: 32px;
+}
+
+.opp-score {
+	font-size: 32px;
+	padding-top: 15px;
 }

@@ -5,11 +5,13 @@ Nexa Light.otf: Nexa Light-5d5c2f10317f31c9ff2fe7adacd6a4c5.otf
 Nexa Light/index.otf: Nexa Light-5d5c2f10317f31c9ff2fe7adacd6a4c5.otf
 montreal-demibold.ttf: montreal-demibold-99b03f16aa48f61e45b9658b298ef49f.ttf
 montreal-demibold/index.ttf: montreal-demibold-99b03f16aa48f61e45b9658b298ef49f.ttf
+blank_profile.png: blank_profile-3f21353d50290f3b289391cfa1473810.png
+blank_profile/index.png: blank_profile-3f21353d50290f3b289391cfa1473810.png
 logo.png: logo-a82695bf36eb54354f66545666d380e2.png
 logo/index.png: logo-a82695bf36eb54354f66545666d380e2.png
-application.js: application-96d780e66f75d4e571d3fb704c8e6b25.js
-application/index.js: application-96d780e66f75d4e571d3fb704c8e6b25.js
-application.css: application-01ff4e3070206af558e114f6000523f6.css
-application/index.css: application-01ff4e3070206af558e114f6000523f6.css
+application.js: application-6fe4ba4822ed454e39e3455728c21ed2.js
+application/index.js: application-6fe4ba4822ed454e39e3455728c21ed2.js
+application.css: application-a5e05ebde8ee4d0f3d1cc6d98524871d.css
+application/index.css: application-a5e05ebde8ee4d0f3d1cc6d98524871d.css
 jquery.min.map: jquery.min-388372ef65cc311f6a3df4a6ceac8d22.map
 jquery/index.min.map: jquery.min-388372ef65cc311f6a3df4a6ceac8d22.map

@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
                 player = Player.create(:usta_id => opponent_usta_id, :name => d[:opponent].downcase)
                 player.get_other_player_info
               end
-              unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score]).first
+              unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :score => d[:score]).first || Match.where(:player1_id => player.id, :player2_id => my_player.id, :score => d[:score]).first
                 Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link)
               end
             end

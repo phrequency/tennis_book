@@ -4,7 +4,7 @@
 			<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> 
 		</div>
 		<div class="profile-info">
-			<div class="row">
+			<div class="row info-row">
 				<div class="col-md-4">
 					<div class="profile-img">
 						<% if @opponent.image %>
@@ -28,39 +28,151 @@
 					</div>
 				</div>
 				<div class="col-md-3">
-					<div class="friend-status">
 						<% if @opponent.is_registered %>
 							<% if @user.is_a_friend(@opponent.user) %>
-								You are friends!
+								<div class="friend-status">
+									You are friends!
+								</div>
 							<% elsif @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id).first %>
-								Friend request pending...	
+								<div class="friend-status">
+									Friend request pending...
+								</div>
 							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && @user.inverse_friendships.where(friend_id: @user.id).first %>
-								Accept friend request!
+								<div class="friend-status-button">
+									Accept friend request!
+								</div>
 							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id).first %>
-								Request to be friends!
+								<div class="friend-status-button">
+									Request to be friends!
+								</div>
 							<% end %>
 						<% end %>
-					</div>
 				</div>
 			</div>
 		</div>
-		<% @own_matches.each do |match| %>
-			<div class="result-line">
-				<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> <% if match.result == "Win" %> won <% elsif match.result == "Loss" %> lost <% elsif match.result == "-" %> played <% end %> against <%= match.opponent.name.split(", ").last.capitalize + " " + match.opponent.name.split(", ").first.capitalize %>
-				<div class="score">
-					Score: <%= match.score %>
-				</div>
+		<div class="profile-info">
+			<div class="sub-dash-title">
+				<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> vs. You	
 			</div>
-		<% end %>
+			<% @matches_against_me.each do |match| %>
+				<div class="row opp-row">
+					<div class="col-md-3">
+						<% if @opponent.image %>
+							<img src="<%=@opponent.image%>" class="opp-prof">
+						<% else %>
+							<img src="/assets/blank_profile.png" class="opp-prof">
+						<% end %>
+					</div>
+					<div class="col-md-6 opp-info">
+						<div class="emp">
+							<%= @user.first_name %> <%= @user.last_name %>
+						</div>
+						<a href="<%=match.link%>" target="_blank"> <%= match.name %> </a>
+					</div>
+					<div class="col-md-3">
+						<div class="opp-score">
+							<%= match.score %>
+						</div>
+					</div>
+				</div>
+			<% end %>
 
-		<% @other_matches.each do |match| %>
-			<div class="result-line">
-				<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> <% if match.result == "Win" %> lost <% elsif match.result == "Loss" %> won <% elsif match.result == "-" %> played <% end %> against <%= match.player.name.split(", ").last.capitalize + " " + match.player.name.split(", ").first.capitalize %>
-				<div class="score">
-					Score: <%= match.score %>
-				</div>
+			<div class="sub-dash-title">
+				<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> vs. Your Friends	
 			</div>
-		<% end %>
+			<% @friend_own_matches.each do |match| %>
+				<div class="row opp-row">
+					<div class="col-md-3">
+						<% if @opponent.image %>
+							<img src="<%=@opponent.image%>" class="opp-prof">
+						<% else %>
+							<img src="/assets/blank_profile.png" class="opp-prof">
+						<% end %>
+					</div>
+					<div class="col-md-6 opp-info">
+						<div class="emp">
+							<%= match.player.name.split(", ").last.capitalize + " " + match.player.name.split(", ").first.capitalize %>
+						</div>
+						<a href="<%=match.link%>" target="_blank"> <%= match.name %> </a>
+					</div>
+					<div class="col-md-3">
+						<div class="opp-score">
+							<%= match.score %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+			<% @friend_other_matches.each do |match| %>
+				<div class="row opp-row">
+					<div class="col-md-3">
+						<% if @opponent.image %>
+							<img src="<%=@opponent.image%>" class="opp-prof">
+						<% else %>
+							<img src="/assets/blank_profile.png" class="opp-prof">
+						<% end %>
+					</div>
+					<div class="col-md-6 opp-info">
+						<div class="emp">
+							<%= match.opponent.name.split(", ").last.capitalize + " " + match.opponent.name.split(", ").first.capitalize %>
+						</div>
+						<a href="<%=match.link%>" target="_blank"> <%= match.name %> </a>
+					</div>
+					<div class="col-md-3">
+						<div class="opp-score">
+							<%= match.score %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+
+			<div class="sub-dash-title">
+				<%= @opponent.name.split(", ").last.capitalize + " " + @opponent.name.split(", ").first.capitalize %> vs. People you've played
+			</div>
+			<% @opponent_matches_other.each do |match| %>
+				<div class="row opp-row">
+					<div class="col-md-3">
+						<% if @opponent.image %>
+							<img src="<%=@opponent.image%>" class="opp-prof">
+						<% else %>
+							<img src="/assets/blank_profile.png" class="opp-prof">
+						<% end %>
+					</div>
+					<div class="col-md-6 opp-info">
+						<div class="emp">
+							<%= match.opponent.name.split(", ").last.capitalize + " " + match.opponent.name.split(", ").first.capitalize %>
+						</div>
+						<a href="<%=match.link%>" target="_blank"> <%= match.name %> </a>
+					</div>
+					<div class="col-md-3">
+						<div class="opp-score">
+							<%= match.score %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+			<% @opponent_matches_own.each do |match| %>
+				<div class="row opp-row">
+					<div class="col-md-3">
+						<% if @opponent.image %>
+							<img src="<%=@opponent.image%>" class="opp-prof">
+						<% else %>
+							<img src="/assets/blank_profile.png" class="opp-prof">
+						<% end %>
+					</div>
+					<div class="col-md-6 opp-info">
+						<div class="emp">
+							<%= match.player.name.split(", ").last.capitalize + " " + match.player.name.split(", ").first.capitalize %>
+						</div>
+						<a href="<%=match.link%>" target="_blank"> <%= match.name %> </a>
+					</div>
+					<div class="col-md-3">
+						<div class="opp-score">
+							<%= match.score %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
 	</div>
 <% else %>
 	<div class="container" align="center">

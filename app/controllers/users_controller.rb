@@ -30,9 +30,25 @@ class UsersController < ApplicationController
 			opp_search_name = opp_last_name + ", " + opp_first_name
 			@opponent = Player.where(:name => opp_search_name).first
 			if @opponent
-				@own_matches = @opponent.own_matches
-				@other_matches = @opponent.other_matches
-				@matches_against_me = @opponent.all_matches.where('player1_id = :player_id OR player2_id = :player_id', player_id: current_user.player.id)
+				@matches_against_me = @opponent.all_matches.where('player1_id = :player_id OR player2_id = :player_id', player_id: @user.player.id)
+				
+				@my_friend_ids = Player.find_all_by_user_id(@user.friends).map(&:id)
+				@friend_own_matches = @opponent.all_matches.where('player1_id IN (:players) AND player2_id = :opponent_id', opponent_id: @opponent.id, players: @my_friend_ids)
+				@friend_other_matches = @opponent.all_matches.where('player1_id = :opponent_id AND player2_id IN (:players)', opponent_id: @opponent.id, players: @my_friend_ids)
+
+				@my_opponent_ids_other = Player.find_all_by_id(@user.player.other_matches.map(&:player1_id)).map(&:id)
+				@my_opponent_ids_own = Player.find_all_by_id(@user.player.own_matches.map(&:player2_id)).map(&:id)
+
+				if @my_opponent_ids_own && @my_friend_ids
+					@my_opponent_ids_own = @my_opponent_ids_own - @my_friend_ids
+				end
+
+				if @my_opponent_ids_other && @my_friend_ids
+					@my_opponent_ids_other = @my_opponent_ids_other - @my_friend_ids
+				end
+
+				@opponent_matches_other = Match.where('player1_id = :opponent_id AND player2_id IN (:players)', opponent_id: @opponent.id, players: @my_opponent_ids_other)
+				@opponent_matches_own = Match.where('player1_id IN (:players) AND player2_id = :opponent_id', opponent_id: @opponent.id, players: @my_opponent_ids_own)
 			end
 		end
 	end
