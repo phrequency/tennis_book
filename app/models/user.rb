@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   after_create :get_usta_data
 
   def is_a_friend(user)
-    if self.friendships.where(friend_id: user.id).first && self.inverse_friendships.where(friend_id: self.id).first
+    if self.friendships.where(friend_id: user.id).first && self.inverse_friendships.where(friend_id: self.id, user_id: user.id).first
       return true
     end
   end

@@ -1,0 +1,36 @@
+<div class="container" align="center">
+	<div class="friends-title">
+		My Friends
+	</div>
+	<div class="friends-box">
+		<% @your_friends.each do |friend| %>
+			<div>
+				<%= friend.first_name + " " + friend.last_name %>
+			</div>
+		<% end %>
+	</div>
+	<div class="friends-title">
+		Pending requests for you
+	</div>
+	<div class="friends-box">
+		<% @people_friended_you.each do |invite| %>
+			<div>
+				<%= form_for Friendship.new do |f| %>
+					<%= hidden_field_tag :friend_id, invite.id %>
+					<%= f.submit "Accept friend request from #{invite.first_name + " " + invite.last_name}!" %>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+	<div class="friends-title">
+		Pending requests from you
+	</div>
+	<div class="friends-box">
+		<% @people_you_friended.each do |request| %>
+			<div>
+				<%= request.first_name + " " + request.last_name %>
+			</div>
+		<% end %>
+	</div>
+</div>
+

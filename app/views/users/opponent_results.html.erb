@@ -33,18 +33,20 @@
 								<div class="friend-status">
 									You are friends!
 								</div>
-							<% elsif @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id).first %>
+							<% elsif @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id, user_id: @opponent.user.id).first %>
 								<div class="friend-status">
 									Friend request pending...
 								</div>
-							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && @user.inverse_friendships.where(friend_id: @user.id).first %>
-								<div class="friend-status-button">
-									Accept friend request!
-								</div>
-							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id).first %>
-								<div class="friend-status-button">
-									Request to be friends!
-								</div>
+							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && @user.inverse_friendships.where(friend_id: @user.id, user_id: @opponent.user.id).first %>
+								<%= form_for Friendship.new do |f| %>
+									<%= hidden_field_tag :friend_id, @opponent.user.id %>
+									<%= f.submit "Accept friend request!" %>
+								<% end %>
+							<% elsif ! @user.friendships.where(friend_id: @opponent.user.id).first && ! @user.inverse_friendships.where(friend_id: @user.id, user_id: @opponent.user.id).first %>
+								<%= form_for Friendship.new do |f| %>
+									<%= hidden_field_tag :friend_id, @opponent.user.id %>
+									<%= f.submit "Request to be friends!" %>
+								<% end %>
 							<% end %>
 						<% end %>
 				</div>

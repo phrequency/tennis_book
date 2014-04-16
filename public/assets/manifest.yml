@@ -7,11 +7,13 @@ montreal-demibold.ttf: montreal-demibold-99b03f16aa48f61e45b9658b298ef49f.ttf
 montreal-demibold/index.ttf: montreal-demibold-99b03f16aa48f61e45b9658b298ef49f.ttf
 blank_profile.png: blank_profile-3f21353d50290f3b289391cfa1473810.png
 blank_profile/index.png: blank_profile-3f21353d50290f3b289391cfa1473810.png
+check.png: check-f01f20d2f9581d6e34301656f1efba7b.png
+check/index.png: check-f01f20d2f9581d6e34301656f1efba7b.png
 logo.png: logo-a82695bf36eb54354f66545666d380e2.png
 logo/index.png: logo-a82695bf36eb54354f66545666d380e2.png
 application.js: application-6fe4ba4822ed454e39e3455728c21ed2.js
 application/index.js: application-6fe4ba4822ed454e39e3455728c21ed2.js
-application.css: application-a5e05ebde8ee4d0f3d1cc6d98524871d.css
-application/index.css: application-a5e05ebde8ee4d0f3d1cc6d98524871d.css
+application.css: application-391278deb51be4eeb47eb2d305ce8d93.css
+application/index.css: application-391278deb51be4eeb47eb2d305ce8d93.css
 jquery.min.map: jquery.min-388372ef65cc311f6a3df4a6ceac8d22.map
 jquery/index.min.map: jquery.min-388372ef65cc311f6a3df4a6ceac8d22.map

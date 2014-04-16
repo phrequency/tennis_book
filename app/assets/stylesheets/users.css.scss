@@ -98,3 +98,40 @@ $lightgreen: #38E156;
 	font-size: 32px;
 	padding-top: 15px;
 }
+
+/* CSS for own Results Page */
+
+.match-box {
+	margin: 10px;
+	border: solid 1px;
+}
+
+.score-box {
+	padding: 5px 0px;
+}
+
+.win-check {
+	width: 15px;
+}
+
+
+/* CSS for Friend List Page */
+
+.friends-box {
+	font-size: 18px;
+	padding: 5px 0px;
+	line-height: 32px;
+}
+
+.friends-title {
+	color: $orange;
+	font-size: 28px;
+	padding: 20px 0px;
+}
+
+.friends-box input[type="submit"] {
+	color: $green;
+	background: none;
+	padding: auto;
+	margin: auto;
+}
