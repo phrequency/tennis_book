@@ -12,7 +12,7 @@ a = Mechanize.new
 
 # puts id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0]
 
-id = 'xhwh1hiXg9IubIpIx+Rikg'
+id = 'vaqU0QjquH2q3ZQDYplthQ'
 
 url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
 
@@ -41,6 +41,7 @@ page = a.post(url, params, headers)
 #puts info_row = page.search("//div[@class='player_specs']")
 
 page.search("//div[@class='CommonTable top-margin']").each do |table|
+	t_name = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '').strip
 	# t_link = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '')
 	# t_id = table.css("span.event_title/a").to_s.split('ViewDraw(').last.split(',').first
 	# t_link = "http://tennislink.usta.com/Tournaments/TournamentHome/Tournament.aspx?T=" + t_id
@@ -57,9 +58,10 @@ page.search("//div[@class='CommonTable top-margin']").each do |table|
 		end
 		detail
 	end
-	details.each do |d|
-		d[:opponent]
-	end
+	puts details.count
+	# details.each do |d|
+	# 	puts d[:opponent]
+	# end
 end
 
 

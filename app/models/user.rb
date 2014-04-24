@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
         "LastName" => "bari",
         "Type" => "Ranking",
         "__EVENTTARGET" => "ctl00_mainContent_PlayerRecord_UpdatePanel",
-        "__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=8/1/2010&EndDt=3/16/2014&PlayerID=#{id}=="
+        "__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=8/1/2004&EndDt=4/16/2014&PlayerID=#{id}=="
       }
 
       headers = {

@@ -38,16 +38,14 @@
 					<% if match.score %>
 						<div class="match-box">
 							<div class="row score-box">
-								<% if match.result == "Win" %>
-									<div class="col-md-2">
-										<img src="/assets/check.png" class="win-check">
-									</div>
-								<% else %>
-									<div class="col-md-2">
-									</div>
-								<% end %>
-								<div class="col-md-4">
+								<%= match.name %>
+							</div>
+							<div class="row score-box">
+								<div class="col-md-5 col-md-offset-1">
 									<%=@user.first_name + " " + @user.last_name %>
+									<% if match.result == "Win" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
 								</div>
 								<% if match.score.include? ';' %>
 									<% match.score.split(';').first(3).each do |score| %>
@@ -62,16 +60,11 @@
 								<% end %>
 							</div>
 							<div class="row score-box">
-								<% if match.result == "Loss" %>
-									<div class="col-md-2">
-										<img src="/assets/check.png" class="win-check">
-									</div>
-								<% else %>
-									<div class="col-md-2">
-									</div>
-								<% end %>
-								<div class="col-md-4">
+								<div class="col-md-5 col-md-offset-1">
 									<%= player.name.split(", ").last.capitalize + " " + player.name.split(", ").first.capitalize %>
+									<% if match.result == "Loss" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
 								</div>
 								<% if match.score.include? ';' %>
 									<% match.score.split(';').first(3).each do |score| %>
@@ -101,16 +94,14 @@
 					<% if match.score %>
 						<div class="match-box">
 							<div class="row score-box">
-								<% if match.result == "Loss" %>
-									<div class="col-md-2">
-										<img src="/assets/check.png" class="win-check">
-									</div>
-								<% else %>
-									<div class="col-md-2">
-									</div>
-								<% end %>
-								<div class="col-md-4">
+								<%= match.name %>
+							</div>
+							<div class="row score-box">
+								<div class="col-md-5 col-md-offset-1">
 									<%=@user.first_name + " " + @user.last_name %>
+									<% if match.result == "Loss" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
 								</div>
 								<% if match.score.include? ';' %>
 									<% match.score.split(';').first(3).each do |score| %>
@@ -125,16 +116,11 @@
 								<% end %>
 							</div>
 							<div class="row score-box">
-								<% if match.result == "Win" %>
-									<div class="col-md-2">
-										<img src="/assets/check.png" class="win-check">
-									</div>
-								<% else %>
-									<div class="col-md-2">
-									</div>
-								<% end %>
-								<div class="col-md-4">
+								<div class="col-md-5 col-md-offset-1">
 									<%= player.name.split(", ").last.capitalize + " " + player.name.split(", ").first.capitalize %>
+									<% if match.result == "Win" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
 								</div>
 								<% if match.score.include? ';' %>
 									<% match.score.split(';').first(3).each do |score| %>

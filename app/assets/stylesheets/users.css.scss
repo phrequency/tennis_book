@@ -8,6 +8,7 @@ $orange: #FF7600;
 $lightorange: #FF9840;
 $green: #00C322;
 $lightgreen: #38E156;
+$lightblue: #C3EEF4;
 
 /* Dashboard */
 
@@ -119,6 +120,8 @@ $lightgreen: #38E156;
 .match-box {
 	margin: 10px;
 	border: solid 1px;
+	max-width: 550px;
+	background: $lightblue;
 }
 
 .score-box {
@@ -127,6 +130,8 @@ $lightgreen: #38E156;
 
 .win-check {
 	width: 15px;
+	margin-left: 12px;
+	margin-top: -4px;
 }
 
 

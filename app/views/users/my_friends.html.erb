@@ -1,11 +1,15 @@
 <div class="container" align="center">
 	<div class="friends-title">
-		My Friends
+		<%=@user.first_name + " " + @user.last_name %>'s Friends
 	</div>
 	<div class="friends-box">
 		<% @your_friends.each do |friend| %>
 			<div>
-				<%= friend.first_name + " " + friend.last_name %>
+				<%= form_tag(:action => "search_opponent", :controller => "users") do %>
+					<%= hidden_field_tag :first_name, request.first_name  %>
+					<%= hidden_field_tag :last_name, request.last_name  %>
+					<%= submit_tag "#{friend.first_name + " " + friend.last_name}" %>
+				<% end %>
 			</div>
 		<% end %>
 	</div>
@@ -28,7 +32,11 @@
 	<div class="friends-box">
 		<% @people_you_friended.each do |request| %>
 			<div>
-				<%= request.first_name + " " + request.last_name %>
+				<%= form_tag(:action => "search_opponent", :controller => "users") do %>
+					<%= hidden_field_tag :first_name, request.first_name  %>
+					<%= hidden_field_tag :last_name, request.last_name  %>
+					<%= submit_tag "#{request.first_name + " " + request.last_name}" %>
+				<% end %>
 			</div>
 		<% end %>
 	</div>
