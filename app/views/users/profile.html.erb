@@ -1,0 +1,59 @@
+<div class="container" align="center">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="section-box">
+				<div class="section-title">
+					<div>
+						<%= @player.real_name %>
+					</div>		
+					<div class="edit-pic-box" data-toggle="modal" data-target="#newPicmodal">
+						<div class="edit-pic-button">
+							Edit Profile Image
+						</div>
+						<% if @player.image.url %>
+							<img src="<%=@player.image%>" class="prof-image">
+						<% else %>
+							<img src="/assets/blank_profile.png" class="prof-image">
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="section-box">
+				<div class="section-title">
+					Account Info:	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="newPicmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="modal-title">Update Profile Picture</div>
+      </div>
+      <div class="modal-body" align="center">
+      	<%= form_for @player, :html => {:multipart => true} do |f| %>
+			<%= f.file_field :image %>
+			<%= f.submit "Update Photo"%>
+		<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+	$('.edit-pic-box').hover(
+	  function() {
+	    $('.edit-pic-button').show();
+	  }, function() {
+	    $('.edit-pic-button').hide();
+	  }
+	);
+</script>

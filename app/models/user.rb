@@ -6,7 +6,12 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :first_name, :last_name
+  attr_accessible :first_name, :last_name, :usta_id
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :usta_id, presence: true
+
 
   has_one :player
   
@@ -35,7 +40,11 @@ class User < ActiveRecord::Base
 
       id = page.search("//span[@id='ctl00_mainContent_grdMain_ctl02_lblPlayerName']/a").attr('href').to_s.split("PlayerId=").last.split("%3d")[0].gsub('%2b','+').gsub('%2f','/')
 
-      unless Player.where(:usta_id => id, :user_id => self.id).first
+      if player = Player.where(:usta_id => id, :user_id => nil).first
+        player.user_id = self.id
+        player.save
+        my_player = player
+      elsif Player.where(:usta_id => id).first == nil
         my_player = Player.create(:usta_id => id, :user_id => self.id, :name => last_name.downcase + ', ' + first_name.downcase)
       end
 
@@ -83,7 +92,8 @@ class User < ActiveRecord::Base
         t_id = table.css("span.event_title/a").to_s.split('ViewDraw(').last.split(',').first
         t_link = "http://tennislink.usta.com/Tournaments/TournamentHome/Tournament.aspx?T=" + t_id
         t_name = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '').strip
-        rows = table.xpath("//tbody/tr")
+        t_date = table.css("span.event_date/text()").to_s.gsub(/^$\n/, '').strip
+        rows = table.css("tr")
         details = rows.collect do |row|
           detail = {}
           [
@@ -105,7 +115,7 @@ class User < ActiveRecord::Base
                 player.get_other_player_info
               end
               unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :score => d[:score]).first || Match.where(:player1_id => player.id, :player2_id => my_player.id, :score => d[:score]).first
-                Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link)
+                Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
               end
             end
           end

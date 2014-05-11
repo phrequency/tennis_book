@@ -30,6 +30,7 @@ TennisBook::Application.routes.draw do
   get '/dash', :to =>  'users#dash', :as => "dash"
   get '/results', :to =>  'users#results', :as => "results"
   get '/my_friends', :to =>  'users#my_friends', :as => "my_friends"
+  get '/my_profile', :to =>  'users#profile', :as => "profile"
 
 
   # The priority is based upon order of creation:

@@ -5,15 +5,17 @@ class UsersController < ApplicationController
 	require 'nokogiri'
 	require 'open-uri'
 	require 'mechanize'
+	require 'aws-sdk'
 
 	def dash
 		@user = current_user
 	end
 
+
 	def results
 		@user = current_user
-		@players_i_played = Player.find_all_by_id(@user.player.own_matches.map(&:player2_id))
-		@players_played_me = Player.find_all_by_id(@user.player.other_matches.map(&:player1_id))
+		@players_i_played = Player.find_all_by_id(@user.player.own_matches.sort.map(&:player2_id))
+		@players_played_me = Player.find_all_by_id(@user.player.other_matches.sort.map(&:player1_id))
 	end
 
 	def my_friends
@@ -45,7 +47,8 @@ class UsersController < ApplicationController
 			opp_search_name = opp_last_name + ", " + opp_first_name
 			@opponent = Player.where(:name => opp_search_name).first
 			if @opponent
-				@matches_against_me = @opponent.all_matches.where('player1_id = :player_id OR player2_id = :player_id', player_id: @user.player.id)
+				@own_matches_against_me = @opponent.all_matches.where('player2_id = :player_id', player_id: @user.player.id)
+				@other_matches_against_me = @opponent.all_matches.where('player1_id = :player_id', player_id: @user.player.id)
 				
 				@my_friend_ids = Player.find_all_by_user_id(@user.friends).map(&:id)
 				@friend_own_matches = @opponent.all_matches.where('player1_id IN (:players) AND player2_id = :opponent_id', opponent_id: @opponent.id, players: @my_friend_ids)
@@ -66,6 +69,11 @@ class UsersController < ApplicationController
 				@opponent_matches_own = Match.where('player1_id IN (:players) AND player2_id = :opponent_id', opponent_id: @opponent.id, players: @my_opponent_ids_own)
 			end
 		end
+	end
+
+	def profile
+		@user = current_user
+		@player = @user.player
 	end
 
 

@@ -120,7 +120,8 @@ $lightblue: #C3EEF4;
 .match-box {
 	margin: 10px;
 	border: solid 1px;
-	max-width: 550px;
+	max-width: 600px;
+	padding: 15px;
 	background: $lightblue;
 }
 
@@ -154,4 +155,40 @@ $lightblue: #C3EEF4;
 	background: none;
 	padding: auto;
 	margin: auto;
+}
+
+
+/* CSS for Profile Page */
+
+.prof-image {
+	width: 150px;
+	padding: 25px;
+	background: #F6F6F6;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.prof-image:hover {
+	background: #EEE;
+}
+
+.edit-pic-box {
+	position: relative;
+	width: 150px;
+}
+
+.edit-pic-box form {
+	font-size: 12px;
+}
+
+.edit-pic-button {
+	position: absolute;
+	display: none;
+	width: 150px;
+	padding: 15px;
+	background: $black;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	opacity: 0.7;
 }

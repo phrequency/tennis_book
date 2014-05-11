@@ -41,11 +41,12 @@ page = a.post(url, params, headers)
 #puts info_row = page.search("//div[@class='player_specs']")
 
 page.search("//div[@class='CommonTable top-margin']").each do |table|
-	t_name = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '').strip
+	puts t_name = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '').strip
+	puts t_date = table.css("span.event_date/text()").to_s.gsub(/^$\n/, '').strip
 	# t_link = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '')
 	# t_id = table.css("span.event_title/a").to_s.split('ViewDraw(').last.split(',').first
 	# t_link = "http://tennislink.usta.com/Tournaments/TournamentHome/Tournament.aspx?T=" + t_id
-	rows = table.xpath("//tbody/tr")
+	rows = table.css("tr")
 	details = rows.collect do |row|
 		detail = {}
 		[
@@ -58,9 +59,9 @@ page.search("//div[@class='CommonTable top-margin']").each do |table|
 		end
 		detail
 	end
-	puts details.count
 	# details.each do |d|
 	# 	puts d[:opponent]
+	# 	puts t_name
 	# end
 end
 

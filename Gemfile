@@ -15,6 +15,10 @@ gem 'delayed_job_active_record'
 gem 'mechanize'
 gem 'nokogiri'
 
+gem 'carrierwave'
+gem 'fog'
+gem 'aws-sdk'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

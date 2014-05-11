@@ -1,10 +1,16 @@
 class Player < ActiveRecord::Base
-  attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range
+  attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range, :image
 
   belongs_to :user
 
   has_many :own_matches, foreign_key: "player1_id", class_name: "Match"
   has_many :other_matches, foreign_key: "player2_id", class_name: "Match"
+
+  mount_uploader :image, ImageUploader
+  
+  def real_name
+    self.name.split(", ").last.capitalize + " " + self.name.split(", ").first.capitalize
+  end
 
 
   def is_registered
