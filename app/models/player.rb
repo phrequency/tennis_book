@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range, :image
+  attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range, :image, :birthday, :gender, :parent_email
 
   belongs_to :user
 
@@ -7,9 +7,17 @@ class Player < ActiveRecord::Base
   has_many :other_matches, foreign_key: "player2_id", class_name: "Match"
 
   mount_uploader :image, ImageUploader
-  
+
   def real_name
     self.name.split(", ").last.capitalize + " " + self.name.split(", ").first.capitalize
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    dob = self.birthday
+    years = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    months = now.month - dob.month
+    years.to_s + " years and " + months.to_s + " months"
   end
 
 

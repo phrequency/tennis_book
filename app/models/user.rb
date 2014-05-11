@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :usta_id, presence: true
 
-
+  #has_many :players
   has_one :player
   
   has_many :friendships
@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   after_create :get_usta_data
+
+  # def player
+  #   self.players.where(primary: "active").first
+  # end
 
   def is_a_friend(user)
     if self.friendships.where(friend_id: user.id).first && self.inverse_friendships.where(friend_id: self.id, user_id: user.id).first

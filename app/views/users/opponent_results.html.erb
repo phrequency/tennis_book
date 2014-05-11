@@ -7,7 +7,7 @@
 			<div class="row info-row">
 				<div class="col-md-4">
 					<div class="profile-img">
-						<% if @opponent.image %>
+						<% if @opponent.image.url %>
 							<img src="<%=@opponent.image%>">
 						<% else %>
 							<img src="/assets/blank_profile.png">
@@ -24,6 +24,9 @@
 						</div>
 						<div class="opponent-details">
 							Date Range: <span class="emp"><%= @opponent.date_range %></span>
+						</div>
+						<div class="opponent-details">
+							<% if @opponent.birthday %>Age: <span class="emp"><%= @opponent.age %></span><% end %>
 						</div>
 					</div>
 				</div>
