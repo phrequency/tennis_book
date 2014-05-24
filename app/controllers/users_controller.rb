@@ -33,16 +33,15 @@ class UsersController < ApplicationController
 
 	def my_friends
 		@user = current_user
+		@player = current_user.active_player
 
-		@people_friended_you_ids = @user.inverse_friendships.where('user_id NOT IN (:fr) OR (:fr) IS NULL', fr: @user.friendships.map(&:friend_id)).map(&:user_id)
-		@people_you_friended_ids = @user.friendships.where('friend_id NOT IN (:inv) OR (:inv) IS NULL', inv: @user.inverse_friendships.map(&:user_id)).map(&:friend_id)
-		@your_friends_ids = @user.friendships.where('friend_id IN (:inv)', inv: @user.inverse_friendships.map(&:user_id)).map(&:friend_id)
+		@people_friended_you_ids = @player.inverse_friendships.where('player_id NOT IN (:fr) OR (:fr) IS NULL', fr: @player.friendships.map(&:friend_id)).map(&:player_id)
+		@people_you_friended_ids = @player.friendships.where('friend_id NOT IN (:inv) OR (:inv) IS NULL', inv: @player.inverse_friendships.map(&:player_id)).map(&:friend_id)
+		@your_friends_ids = @player.friendships.where('friend_id IN (:inv)', inv: @player.inverse_friendships.map(&:player_id)).map(&:friend_id)
 
-
-
-		@people_friended_you = User.find_all_by_id(@people_friended_you_ids)
-		@people_you_friended = User.find_all_by_id(@people_you_friended_ids)
-		@your_friends = User.find_all_by_id(@your_friends_ids)
+		@people_friended_you = Player.find_all_by_id(@people_friended_you_ids)
+		@people_you_friended = Player.find_all_by_id(@people_you_friended_ids)
+		@your_friends = Player.find_all_by_id(@your_friends_ids)
 	end
 
 
@@ -71,10 +70,10 @@ class UsersController < ApplicationController
 				@own_matches_against_me = @opponent.all_matches.where('player2_id = :player_id', player_id: @user.active_player.id)
 				@other_matches_against_me = @opponent.all_matches.where('player1_id = :player_id', player_id: @user.active_player.id)
 				
-				@my_friendships = @user.friends
+				@my_friendships = @player.friends
 				@my_friend_ids = []
 				@my_friendships.each do |friendship|
-					if @user.is_a_friend(friendship)
+					if @player.is_a_friend(friendship)
 						@my_friend_ids << friendship.id 
 					end
 				end

@@ -15,22 +15,11 @@ class User < ActiveRecord::Base
   has_many :accounts
   has_many :players, :through => :accounts
   
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   after_create :get_usta_data
 
   def active_player
     self.accounts.where(active: "true").first.player
-  end
-
-  def is_a_friend(user)
-    if self.friendships.where(friend_id: user.id).first && self.inverse_friendships.where(friend_id: self.id, user_id: user.id).first
-      return true
-    end
   end
 
   def get_usta_data
@@ -46,9 +35,10 @@ class User < ActiveRecord::Base
       if player = Player.where(:usta_id => id).first
         account = Account.where(player_id: player.id, user_id: self.id).first
       end
-      if player && account
-        my_player = player
-      else
+      if player && !account
+        my_account = Account.create(user_id: self.id, player_id: player.id, active: "true")
+        self.get_new_player_usta_data(player.id)
+      elsif !player && !account
         my_player = Player.create(:usta_id => id, :name => last_name.downcase + ', ' + first_name.downcase)
         my_account = Account.create(user_id: self.id, player_id: my_player.id, active: "true")
       

@@ -4,6 +4,12 @@ class Player < ActiveRecord::Base
   has_many :accounts
   has_many :users, :through => :accounts
 
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :player
+
   has_many :own_matches, foreign_key: "player1_id", class_name: "Match"
   has_many :other_matches, foreign_key: "player2_id", class_name: "Match"
 
@@ -11,6 +17,12 @@ class Player < ActiveRecord::Base
 
   def real_name
     self.name.split(", ").last.capitalize + " " + self.name.split(", ").first.capitalize
+  end
+
+  def is_a_friend(player)
+    if self.friendships.where(friend_id: player.id).first && self.inverse_friendships.where(friend_id: self.id, player_id: player.id).first
+      return true
+    end
   end
 
   def age

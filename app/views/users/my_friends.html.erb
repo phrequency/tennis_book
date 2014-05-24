@@ -1,15 +1,11 @@
 <div class="container" align="center">
 	<div class="friends-title">
-		<%=@user.first_name + " " + @user.last_name %>'s Friends
+		<%=@user.active_player.real_name %>'s Friends
 	</div>
 	<div class="friends-box">
 		<% @your_friends.each do |friend| %>
-			<div>
-				<%= form_tag(:action => "search_opponent", :controller => "users") do %>
-					<%= hidden_field_tag :first_name, friend.first_name  %>
-					<%= hidden_field_tag :last_name, friend.last_name  %>
-					<%= submit_tag "#{friend.first_name + " " + friend.last_name}" %>
-				<% end %>
+			<div class="submit">
+				<a href="<%=opponent_result_path(friend)%>"><%= friend.real_name %></a>
 			</div>
 		<% end %>
 	</div>
@@ -21,7 +17,7 @@
 			<div>
 				<%= form_for Friendship.new do |f| %>
 					<%= hidden_field_tag :friend_id, invite.id %>
-					<%= f.submit "Accept friend request from #{invite.first_name + " " + invite.last_name}!" %>
+					<%= f.submit "Accept friend request from #{invite.real_name}!" %>
 				<% end %>
 			</div>
 		<% end %>
@@ -31,12 +27,8 @@
 	</div>
 	<div class="friends-box">
 		<% @people_you_friended.each do |frequest| %>
-			<div>
-				<%= form_tag(:action => "search_opponent", :controller => "users") do %>
-					<%= hidden_field_tag :first_name, frequest.first_name  %>
-					<%= hidden_field_tag :last_name, frequest.last_name  %>
-					<%= submit_tag "#{frequest.first_name + " " + frequest.last_name}" %>
-				<% end %>
+			<div class="submit">
+				<a href="<%=opponent_result_path(frequest)%>"><%= frequest.real_name %></a>
 			</div>
 		<% end %>
 	</div>

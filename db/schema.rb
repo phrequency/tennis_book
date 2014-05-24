@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140523223252) do
+ActiveRecord::Schema.define(:version => 20140524194045) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -41,14 +41,13 @@ ActiveRecord::Schema.define(:version => 20140523223252) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "friendships", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "friend_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "player_id"
   end
 
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
-  add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
   create_table "matches", :force => true do |t|
     t.integer  "player1_id"
