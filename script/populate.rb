@@ -17,7 +17,7 @@ end
 # 	# 	Friendship.create(user_id: f.id, friend_id: 256)
 # 	# end
 
-# 	# Delayed::Job.delete_all && User.delete_all && Player.delete_all && Friendship.delete_all && Match.delete_all
+# 	# Delayed::Job.delete_all && User.delete_all && Account.delete_all && Player.delete_all && Friendship.delete_all && Match.delete_all
 
 
 
