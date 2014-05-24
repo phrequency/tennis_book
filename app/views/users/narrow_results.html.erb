@@ -1,0 +1,9 @@
+<div class="container" align="center">
+	<% if @results %>
+		<% @results.each do |result| %>
+			<div>
+				<a href="<%=opponent_result_path(result)%>"><%= result.real_name %> - <%= result.location %></a>
+			</div>
+		<% end %>
+	<% end %>
+</div>

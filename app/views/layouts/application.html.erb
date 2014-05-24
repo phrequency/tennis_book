@@ -32,9 +32,11 @@
           <% if !current_user %>
             <li><a href="<%=new_user_session_path%>">Login</a></li>
           <% else %>
-            <li><a href="<%=dash_path%>">Dashboard</a></li>
-            <li><a href="<%=profile_path%>">Player Profile</a></li>
-            <li><a href="<%=destroy_user_session_path%>">Logout</a></li>
+            <% if current_user.accounts.first %>
+              <li><a href="<%=dash_path%>">Dashboard</a></li>
+              <li><a href="<%=profile_path%>">Player Profile</a></li>
+              <li><a href="<%=destroy_user_session_path%>">Logout</a></li>
+            <% end %>
           <% end %>
         </ul>
       </div>

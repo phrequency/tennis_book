@@ -1,21 +1,44 @@
 <div class="container" align="center">
 	<div class="row">
-		<div class="col-md-6">
-			<div class="section-box">
-				<a href="<%=results_path%>">
-					<div class="section-title">
-						My Results & Rankings
+		<div class="col-md-8 player-name">
+			<%= @user.active_player.real_name %>'s Dashboard
+		</div>
+		<div class="col-md-4">
+			<div class="accounts-title">
+				Switch Player Accounts:
+			</div>
+			<% @user.accounts.order(:active).each do |account| %>
+				<% if account.active == "true" %>
+					<div class="accounts">
+						You are currently logged in as <%= account.player.real_name %>
 					</div>
-				</a>
+				<% else %>
+					<%= form_tag(:action => "switch_accounts", :controller => "users") do %>
+						<%= hidden_field_tag "id", account.id %>
+						<%= submit_tag "Log in as #{account.player.real_name}", :class => "no-format-submit" %>
+					<% end %>
+				<% end %>
+			<% end %>
+			<div class="new-player" data-toggle="modal" data-target="#newPlayermodal">
+				Add a New Player
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" align="center">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="section-box section-box-hover" onclick="window.location='<%=results_path%>';">
+				<div class="section-title">
+					My Results & Rankings
+				</div>				
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="section-box">
-				<a href="<%=profile_path%>">
-					<div class="section-title">
-						My Player Profile
-					</div>
-				</a>
+			<div class="section-box section-box-hover" onclick="window.location='<%=profile_path%>';">
+				<div class="section-title">
+					My Player Profile
+				</div>
 			</div>
 		</div>
 	</div>
@@ -35,14 +58,41 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="section-box">
-				<a href="<%=my_friends_path%>">
-					<div class="section-title">
-						My Friends & Requests
-					</div>
-				</a>
+			<div class="section-box section-box-hover" onclick="window.location='<%=my_friends_path%>';">
+				<div class="section-title">
+					My Friends & Requests
+				</div>
 			</div>
 		</div>
 	</div>
-	
+</div>
+
+<div class="modal fade" id="newPlayermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="modal-title">Add a new player to your account</div>
+      </div>
+      <div class="modal-body" align="center">
+      		<%= form_tag(:action => "add_new_player", :controller => "users") do %>
+			  <div class="row">
+			  	<div><%= label_tag :first_name, "Player First Name" %><br />
+			  		<%= text_field_tag :first_name %></div>
+			  </div>
+			  <div class="row">
+			  	<div><%= label_tag :last_name, "Player Last Name" %><br />
+			  		<%= text_field_tag :last_name %></div>
+			  </div>
+			  <div class="row">
+			  	<div><%= label_tag :usta_id, "Player USTA #" %><br />
+			  	<%= text_field_tag :usta_id %></div>
+			  </div>
+			  <div class="row">
+			  	<%= submit_tag "Add New Player", :class => "new-player" %>
+			  </div>
+			<% end %>
+      </div>
+    </div>
+  </div>
 </div>

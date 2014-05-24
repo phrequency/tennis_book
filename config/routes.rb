@@ -26,11 +26,18 @@ TennisBook::Application.routes.draw do
 
   # match '/getdata', :to =>  'users#get_usta_data'
   match '/search_opponent', :to =>  'users#search_opponent'
-  match '/opponent_results', :to =>  'users#opponent_results'
+  match '/add_new_player', :to =>  'users#add_new_player', :as => "add_new_player"
+  match '/choose_opponent', :to =>  'users#narrow_results', :as => "narrow_results"
+  match '/switch_accounts', :to =>  'users#switch_accounts', :as => "switch_accounts"
+  
+  
+  match '/opponent_results/:id', :to =>  'users#opponent_results', :as => "opponent_result"
   get '/dash', :to =>  'users#dash', :as => "dash"
   get '/results', :to =>  'users#results', :as => "results"
   get '/my_friends', :to =>  'users#my_friends', :as => "my_friends"
   get '/my_profile', :to =>  'users#profile', :as => "profile"
+
+  get '/loading', :to =>  'static_pages#loading', :as => "loading"
 
 
   # The priority is based upon order of creation:

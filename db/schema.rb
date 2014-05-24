@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140511223440) do
+ActiveRecord::Schema.define(:version => 20140523223252) do
+
+  create_table "accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "player_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "active"
+  end
+
+  add_index "accounts", ["player_id"], :name => "index_accounts_on_player_id"
+  add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -67,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20140511223440) do
     t.string   "gender"
     t.datetime "birthday"
     t.string   "parent_email"
-    t.string   "primary"
   end
 
   add_index "players", ["user_id"], :name => "index_players_on_user_id"

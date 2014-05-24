@@ -12,12 +12,55 @@ $lightblue: #C3EEF4;
 
 /* Dashboard */
 
+.player-name {
+	font-size: 22px;
+	color: $green;
+	padding-top: 5px;
+	padding-bottom:15px;
+}
+
+.new-player {
+	background: $lightgreen;
+	padding: 10px;
+	border-radius: 3px;
+	width: 200px;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+}
+
+.new-player:hover {
+	background: $green;
+}
+
+.accounts-title {
+	font-size: 16px;
+}
+
+.no-format-submit {
+	background: none !important;
+	color: $orange !important;
+	font-size: inherit !important;
+	padding-bottom: 5px;
+	margin: inherit !important;
+}
+
+.accounts {
+	color: $black;
+	padding-bottom: 5px;
+}
+
 .section-box {
 	padding: 60px;
 	border: solid 1px green;
 	margin: 30px 0px;
 	border-radius: 3px;
 	border-top: solid 5px $green;
+	cursor: pointer;
+}
+
+.section-box-hover:hover {
+	background: $lightblue;
 }
 
 .section-title {
@@ -127,6 +170,11 @@ $lightblue: #C3EEF4;
 
 .score-box {
 	padding: 5px 0px;
+}
+
+.scoring-table td {
+	padding: 5px 10px;
+	border: solid 2px;
 }
 
 .win-check {

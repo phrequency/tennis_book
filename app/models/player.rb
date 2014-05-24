@@ -1,7 +1,8 @@
 class Player < ActiveRecord::Base
   attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range, :image, :birthday, :gender, :parent_email
 
-  belongs_to :user
+  has_many :accounts
+  has_many :users, :through => :accounts
 
   has_many :own_matches, foreign_key: "player1_id", class_name: "Match"
   has_many :other_matches, foreign_key: "player2_id", class_name: "Match"
@@ -17,18 +18,18 @@ class Player < ActiveRecord::Base
     dob = self.birthday
     years = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     months = now.month - dob.month
-    years.to_s + " years and " + months.to_s + " months"
+    years.to_s + " years, " + months.to_s + " months"
   end
 
 
   def is_registered
-  	if self.user
+  	if self.accounts.first
   		return true
   	end 	
   end
 
   def all_matches
-	Match.where('player1_id = :player_id OR player2_id = :player_id', player_id: self.id)
+	 Match.where('player1_id = :player_id OR player2_id = :player_id', player_id: self.id)
   end
 
   def get_other_player_info
