@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
       if current_user.active_player.birthday && current_user.active_player.gender
   		  dash_path
       else
-        flash[:error] = "Please update your account info below!"
-        profile_path
+        flash[:notice] = "Please finish your registration process"
+        step2_path
       end
   	else
   		loading_path

@@ -102,6 +102,11 @@ class UsersController < ApplicationController
 		@player = @user.active_player
 	end
 
+	def step2
+		@user = current_user
+		@player = @user.active_player
+	end
+
 	def add_new_player
 		@user = current_user
 		@user.add_this_player(params[:first_name], params[:last_name])

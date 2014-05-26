@@ -59,6 +59,80 @@
 						</div>
 					<% end %>
 				</div>
+				<hr>
+				<div class="account-info">
+					<% if @player.hometown %>
+						Hometown: <span class="emp"><%= @player.hometown %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Hometown </a>
+						</div>
+					<% end %>
+				</div>
+				<div class="account-info">
+					<% if @player.school %>
+						School: <span class="emp"><%= @player.school %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add School </a>
+						</div>
+					<% end %>
+				</div>
+				<div class="account-info">
+					<% if @player.grade %>
+						Grade: <span class="emp"><%= @player.grade %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Grade </a>
+						</div>
+					<% end %>
+				</div>
+				<hr>
+				<div class="account-info">
+					<% if @player.racket %>
+						Racket: <span class="emp"><%= @player.racket %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Racket Info </a>
+						</div>
+					<% end %>
+				</div>
+				<div class="account-info">
+					<% if @player.strings %>
+						Strings: <span class="emp"><%= @player.strings %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Strings Info </a>
+						</div>
+					<% end %>
+				</div>
+				<div class="account-info">
+					<% if @player.shoes %>
+						Shoes: <span class="emp"><%= @player.shoes %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Shoes Info </a>
+						</div>
+					<% end %>
+				</div>
+				<div class="account-info">
+					<% if @player.clothing %>
+						Clothing: <span class="emp"><%= @player.clothing %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Clothing Info </a>
+						</div>
+					<% end %>
+				</div>
+				<div class="account-info">
+					<% if @player.hand %>
+						Right or Left-Handed: <span class="emp"><%= @player.hand %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
+					<% else %>
+						<div class="">
+							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Hand Preferences </a>
+						</div>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -88,7 +162,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="modal-title">Edit Account Info</div>
       </div>
-      <div class="modal-body" align="center">
+      <div class="modal-body" align="left">
       	<%= form_for @player do |f| %>
       		<div>
 				<%= f.label :birthday %>: 
@@ -105,6 +179,36 @@
 			<br>
 			<div>
 				<%= f.email_field :parent_email, placeholder: "Parent Email" %>
+			</div>
+			<hr>
+			<div>
+				<%= f.text_field :hometown, placeholder: "Hometown" %>
+			</div>
+			<div>
+				<%= f.text_field :school, placeholder: "School" %>
+			</div>
+			<div>
+				<%= f.text_field :grade, placeholder: "Grade" %>
+			</div>
+			<hr>
+			<div>
+				<%= f.text_field :racket, placeholder: "Racket" %>
+			</div>
+			<div>
+				<%= f.text_field :strings, placeholder: "Strings" %>
+			</div>
+			<div>
+				<%= f.text_field :shoes, placeholder: "Shoes" %>
+			</div>
+			<div>
+				<%= f.text_field :clothing, placeholder: "Clothing" %>
+			</div>
+			<div>
+				<%= f.label :right_or_left_handed %>: 
+				<%= f.radio_button(:hand, "Right") %>
+				<%= f.label(:hand_right, "Right") %>
+				<%= f.radio_button(:hand, "Left") %>
+				<%= f.label(:hand_left, "Left") %>
 			</div>
 			<%= f.submit %>
 		<% end %>

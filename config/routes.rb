@@ -36,6 +36,7 @@ TennisBook::Application.routes.draw do
   get '/results', :to =>  'users#results', :as => "results"
   get '/my_friends', :to =>  'users#my_friends', :as => "my_friends"
   get '/my_profile', :to =>  'users#profile', :as => "profile"
+  get '/step_2', :to =>  'users#step2', :as => "step2"
 
   get '/loading', :to =>  'static_pages#loading', :as => "loading"
 
