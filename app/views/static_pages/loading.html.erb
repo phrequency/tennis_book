@@ -1,3 +1,9 @@
 <div class="container" align="center">
-	We're loading your player results! Please refresh this page in a few moments...
+	<span class="emp">We're loading your player results! Please refresh this page in a few moments...</span>
+	<br><br>
+	The USTA ID you have signed up with is: <u><%=current_user.usta_id %></u>. 
+	<br><br>
+	If this is incorrect, please <%= link_to "click here and sign up again with the correct USTA ID", destroy_old_path, method: :delete %>
+
+
 </div>

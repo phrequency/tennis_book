@@ -40,6 +40,8 @@ TennisBook::Application.routes.draw do
 
   get '/loading', :to =>  'static_pages#loading', :as => "loading"
 
+  match '/destroy_user', :to => "users#destroy_old", :as => "destroy_old", :via => :delete
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

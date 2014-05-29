@@ -109,9 +109,22 @@ class UsersController < ApplicationController
 
 	def add_new_player
 		@user = current_user
-		@user.add_this_player(params[:first_name], params[:last_name])
-		flash[:notice] = "Adding new player. This might take a while! Refresh this page in a few minutes"
-		redirect_to dash_path
+		if params[:usta_id] && params[:usta_id].length == 10
+			@user.add_this_player(params[:first_name], params[:last_name], params[:usta_id])
+			flash[:notice] = "Adding new player. This might take a while! Refresh this page in a few minutes"
+			redirect_to dash_path
+		else
+			flash[:notice] = "Please enter a correct USTA ID"
+			redirect_to dash_path
+		end
+	end
+
+	def destroy_old
+		current_user.destroy
+		if current_user.destroy
+			flash[:notice] = "Please sign up again with the correct USTA ID"
+			redirect_to new_user_registration_path
+		end
 	end
 
 

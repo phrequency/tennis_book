@@ -1,6 +1,6 @@
 class Player < ActiveRecord::Base
   attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range, :image, :birthday, :gender, :parent_email
-  attr_accessible :hometown, :school, :grade, :racket, :strings, :shoes, :clothing, :hand
+  attr_accessible :hometown, :school, :grade, :racket, :strings, :shoes, :clothing, :hand, :user_usta_id
 
   has_many :accounts
   has_many :users, :through => :accounts
@@ -91,6 +91,6 @@ class Player < ActiveRecord::Base
       end
   end
 
-  handle_asynchronously :get_other_player_info
+  handle_asynchronously :get_other_player_info, :priority => 5
 
 end
