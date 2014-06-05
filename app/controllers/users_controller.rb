@@ -27,8 +27,16 @@ class UsersController < ApplicationController
 	def results
 		@user = current_user
 		@player = current_user.active_player
-		@players_i_played = Player.find_all_by_id(@user.active_player.own_matches.sort.map(&:player2_id))
-		@players_played_me = Player.find_all_by_id(@user.active_player.other_matches.sort.map(&:player1_id))
+		@players_i_played = Player.find_all_by_id(@user.active_player.own_matches.sort.map(&:player2_id)).sort_by(&:name)
+		@players_played_me = Player.find_all_by_id(@user.active_player.other_matches.sort.map(&:player1_id)).sort_by(&:name)
+	end
+
+	def results_by_date
+		@user = current_user
+		@player = current_user.active_player
+		@own_matches = @user.active_player.own_matches
+		@other_matches = @user.active_player.other_matches
+		@all_my_matches = (@own_matches + @other_matches).sort#_by{|h| h[:real_datetime]}
 	end
 
 	def my_friends
@@ -46,12 +54,14 @@ class UsersController < ApplicationController
 
 
 	def search_opponent
+		@user = current_user
 		opp_first_name = params[:first_name].downcase.strip
 		opp_last_name = params[:last_name].downcase.strip
 		redirect_to narrow_results_path(opp_name: opp_first_name + "_" + opp_last_name)
 	end
 
 	def narrow_results
+		@user = current_user
 		if params[:opp_name]
 			opp_first_name = params[:opp_name].split('_').first
 			opp_last_name = params[:opp_name].split('_').last

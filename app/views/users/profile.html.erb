@@ -7,12 +7,15 @@
 						<%= @player.real_name %>
 					</div>		
 					<div class="edit-pic-box" data-toggle="modal" data-target="#newPicmodal">
-						<div class="edit-pic-button">
-							Edit Profile Image
-						</div>
 						<% if @player.image.url %>
+							<div class="edit-pic-button">
+								Edit Profile Image
+							</div>
 							<img src="<%=@player.image%>" class="prof-image">
 						<% else %>
+							<div class="add-pic-button">
+								Add Profile Image
+							</div>
 							<img src="/assets/blank_profile.png" class="prof-image">
 						<% end %>
 					</div>
@@ -20,120 +23,125 @@
 			</div>
 		</div>
 		<div class="col-md-8">
-			<div class="section-box">
-				<div class="section-title">
-					Account Info:	
-				</div>
-				<div class="account-info">
-					Name: <span class="emp"><%= @player.real_name %> </span> 
-				</div>
-				<div class="account-info">
-					USTA ID: <span class="emp"><%= @player.user_usta_id %></span>
-				</div>
-				<div class="account-info">
-					<% if @player.birthday %>
-						Date of Birth: <span class="emp"><%= @player.birthday.strftime("%B %d, %Y") %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
-						<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Birth Date </a>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.gender %>
-						Gender: <span class="emp"><%= @player.gender %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+			<%= form_for @player do |f| %>
+				<div class="section-box">
+					<div class="section-title">
+						Account Info:	
+					</div>
+					<hr>
+					<div class="sub-profile-title">
+						Profile Info
+					</div>
+					<hr>
+					<div class="account-info">
+						Name: <span class="emp"><%= @player.real_name %> </span> 
+					</div>
+					<div class="account-info">
+						USTA ID: <span class="emp"><%= @player.user_usta_id %></span>
+					</div>
+					<div class="account-info">
+						Login Email: <span class="emp"><%= @user.email %></span>
+					</div>
+					<div class="account-info">
+						<%= f.date_select :birthday, start_year: 1980 %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Gender </a>
+							<div>
+								Gender: 
+								<%= f.radio_button(:gender, "Boy") %>
+								<%= f.label(:gender_boy, "Boy") %>
+								<%= f.radio_button(:gender, "Girl") %>
+								<%= f.label(:gender_girl, "Girl") %>
+							</div>
 						</div>
-					<% end %>
-				</div>
-				<hr>
-				<div class="account-info">
-					Login Email: <span class="emp"><%= @user.email %></span>
-				</div>
-				<div class="account-info">
-					<% if @player.parent_email %>
-						Parent Email: <span class="emp"><%= @player.parent_email %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<hr>
+					<div class="sub-profile-title">
+						Background Info.
+					</div>
+					<hr>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Parent Email </a>
+							<%= f.text_field :hometown, placeholder: "Hometown" %>
 						</div>
-					<% end %>
-				</div>
-				<hr>
-				<div class="account-info">
-					<% if @player.hometown %>
-						Hometown: <span class="emp"><%= @player.hometown %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Hometown </a>
+							<%= f.text_field :school, placeholder: "School" %>
 						</div>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.school %>
-						School: <span class="emp"><%= @player.school %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add School </a>
+							<%= f.text_field :grade, placeholder: "Grade" %>
 						</div>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.grade %>
-						Grade: <span class="emp"><%= @player.grade %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Grade </a>
+							<%= f.text_field :section, placeholder: "USTA Section/District" %>
 						</div>
-					<% end %>
-				</div>
-				<hr>
-				<div class="account-info">
-					<% if @player.racket %>
-						Racket: <span class="emp"><%= @player.racket %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Racket Info </a>
+							<%= f.text_field :coach, placeholder: "Coach" %>
 						</div>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.strings %>
-						Strings: <span class="emp"><%= @player.strings %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Strings Info </a>
+							<%= f.text_field :club, placeholder: "Tennis Club" %>
 						</div>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.shoes %>
-						Shoes: <span class="emp"><%= @player.shoes %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Shoes Info </a>
+							<%= f.text_field :mentor, placeholder: "Mentor(s)" %>
 						</div>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.clothing %>
-						Clothing: <span class="emp"><%= @player.clothing %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<hr>
+					<div class="sub-profile-title">
+						Player Preferences
+					</div>
+					<hr>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Clothing Info </a>
+							<%= f.text_field :racket, placeholder: "Racket" %>
 						</div>
-					<% end %>
-				</div>
-				<div class="account-info">
-					<% if @player.hand %>
-						Right or Left-Handed: <span class="emp"><%= @player.hand %></span> <a href="" data-toggle="modal" data-target="#editInfomodal">Edit</a>
-					<% else %>
+					</div>
+					<div class="account-info">
 						<div class="">
-							<a href="" data-toggle="modal" data-target="#editInfomodal"> Add Hand Preferences </a>
+							<%= f.text_field :strings, placeholder: "Strings" %>
 						</div>
-					<% end %>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.text_field :shoes, placeholder: "Shoes" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.text_field :clothing, placeholder: "Clothing" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.text_field :favorites, placeholder: "Favorite Players" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.text_field :colleges, placeholder: "College Preferences" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.radio_button(:hand, "Right") %>
+							<%= f.label(:hand_right, "Right") %>
+							<%= f.radio_button(:hand, "Left") %>
+							<%= f.label(:hand_left, "Left") %>
+						</div>
+					</div>
+				<%= f.submit %>
 				</div>
-			</div>
+			<% end %>
 		</div>
 	</div>
 </div>
@@ -177,9 +185,6 @@
 				<%= f.label(:gender_girl, "Girl") %>
 			</div>
 			<br>
-			<div>
-				<%= f.email_field :parent_email, placeholder: "Parent Email" %>
-			</div>
 			<hr>
 			<div>
 				<%= f.text_field :hometown, placeholder: "Hometown" %>

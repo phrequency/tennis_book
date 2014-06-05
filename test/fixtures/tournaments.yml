@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  player: MyString
+  opponent: MyString
+  name: MyString
+  location: MyString
+  result: MyString
+  date: 2014-06-05 11:36:59
+  comments: MyText
+  score: MyString
+
+two:
+  player: MyString
+  opponent: MyString
+  name: MyString
+  location: MyString
+  result: MyString
+  date: 2014-06-05 11:36:59
+  comments: MyText
+  score: MyString

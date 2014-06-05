@@ -1,0 +1,21 @@
+<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="modal-title">Invite a Friend to TennisBook</div>
+      </div>
+      <div class="modal-body" align="center">
+      		<%= form_tag(:action => "send_friend_invite", :controller => "players") do %>
+			  <div class="row">
+			  	<div><%= label_tag :email, "Friend's Email Address" %><br />
+			  		<%= text_field_tag :email %></div>
+			  </div>
+			  <div class="row">
+			  	<%= submit_tag "Send Invite!" %>
+			  </div>
+			<% end %>
+      </div>
+    </div>
+  </div>
+</div>

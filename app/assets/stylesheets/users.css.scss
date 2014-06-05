@@ -12,11 +12,12 @@ $lightblue: #C3EEF4;
 
 /* Dashboard */
 
+
 .player-name {
-	font-size: 22px;
+	font-size: 38px;
 	color: $green;
 	padding-top: 5px;
-	padding-bottom:15px;
+	padding-bottom:5px;
 }
 
 .new-player {
@@ -39,10 +40,23 @@ $lightblue: #C3EEF4;
 
 .no-format-submit {
 	background: none !important;
-	color: $orange !important;
+	color: $black !important;
+	padding: 0px !important;
 	font-size: inherit !important;
-	padding-bottom: 5px;
 	margin: inherit !important;
+	cursor: pointer;
+}
+
+.no-format-submit:hover {
+	color: $green !important;
+}
+
+.add-new-player-button {
+	cursor: pointer;
+}
+
+.add-new-player-button:hover {
+	color: $green;
 }
 
 .accounts {
@@ -51,7 +65,7 @@ $lightblue: #C3EEF4;
 }
 
 .section-box {
-	padding: 60px;
+	padding: 30px;
 	border: solid 1px green;
 	margin: 30px 0px;
 	border-radius: 3px;
@@ -73,7 +87,7 @@ $lightblue: #C3EEF4;
 }
 
 .dash-title {
-	font-size: 18px;
+	font-size: 30px;
 	padding: 20px 0px 30px 0px;
 	color: white;
 	background: $green;
@@ -83,6 +97,26 @@ $lightblue: #C3EEF4;
 
 .profile-info {
 	margin-top: 15px;
+}
+
+.toggle {
+	padding: 10px;
+	background: #EEE;
+	border-radius: 3px;
+	border: solid 1px;
+	cursor:pointer;
+}
+
+.toggle-active {
+	padding: 10px;
+	background: $lightblue;
+	border-radius: 3px;
+	border: solid 1px;
+	cursor:pointer;
+}
+
+.toggle:hover {
+	background: #F6F6F6;
 }
 
 .profile-img {
@@ -129,12 +163,13 @@ $lightblue: #C3EEF4;
 }
 
 .sub-dash-title {
-	font-size: 16px;
+	font-size: 25px;
 	padding: 7px;
 	color: white;
 	background: $green;
 	border-radius: 3px;
 	margin-bottom: 15px;	
+	max-width: 600px;
 }
 
 .opp-prof {
@@ -225,10 +260,6 @@ $lightblue: #C3EEF4;
 	width: 150px;
 }
 
-#newPicmodal form {
-	font-size: 0px;
-}
-
 .edit-pic-button {
 	position: absolute;
 	display: none;
@@ -241,6 +272,23 @@ $lightblue: #C3EEF4;
 	opacity: 0.7;
 }
 
+.add-pic-button {
+	position: absolute;
+	display: block;
+	width: 150px;
+	padding: 15px;
+	background: $black;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+input[type="file"] {
+    display: inline-block !important;
+    width: 200px;
+}
+
 .account-info {
 	font-size: 15px;
 	padding: 6px 0px;
@@ -248,4 +296,10 @@ $lightblue: #C3EEF4;
 
 .account-info .emp {
 	font-size: 15px;
+}
+
+.sub-profile-title{
+	font-size: 18px;
+	color: $black;
+	padding: 0px 0px;
 }

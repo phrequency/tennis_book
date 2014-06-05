@@ -1,0 +1,35 @@
+// Place all the styles related to the tournaments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$black: #313131;
+$orange: #FF7600;
+$lightorange: #FF9840;
+$green: #00C322;
+$lightgreen: #38E156;
+$lightblue: #C3EEF4;
+
+.my-tournaments-title {
+	color: #00c322;
+	font-size: 26px;
+	padding: 15px 0px;
+}
+
+.tourn-right {
+	border-left: solid 1px #CCC;
+	margin-bottom: 15px;
+}
+
+.enter-new-tournament {
+	padding: 10px 0px;
+}
+
+.required-field {
+	font-size: 18px;
+	color: red;
+}
+
+.my-tournament {
+	padding: 10px 0px;
+}

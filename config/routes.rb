@@ -1,5 +1,8 @@
 TennisBook::Application.routes.draw do
 
+  resources :tournaments
+
+
   resources :matches
 
 
@@ -9,10 +12,10 @@ TennisBook::Application.routes.draw do
   resources :friendships
 
 
-  devise_for :users, :skip => [:sessions]
+  devise_for :users, :skip => [:sessions], :controllers => {:registrations => "registration"}
   as :user do
-    get 'join' => 'devise/registrations#new', :as => :new_user_registration
-    post 'join' => 'devise/registrations#create', :as => :user_registration
+    get 'join' => 'registration#new', :as => :new_user_registration
+    post 'join' => 'registration#create', :as => :user_registration
     get 'login' => 'devise/sessions#new', :as => :new_user_session
     post 'login' => 'devise/sessions#create', :as => :user_session
     get 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
@@ -29,16 +32,23 @@ TennisBook::Application.routes.draw do
   match '/add_new_player', :to =>  'users#add_new_player', :as => "add_new_player"
   match '/choose_opponent', :to =>  'users#narrow_results', :as => "narrow_results"
   match '/switch_accounts', :to =>  'users#switch_accounts', :as => "switch_accounts"
+
+  post '/send_friend_invite', :to => "players#send_friend_invite", :as => "send_friend_invite"
   
+  get '/my_tournaments', :to =>  'tournaments#my_tournaments', :as => "my_tournaments"
+  get '/tournament/:id', :to =>  'tournaments#edit', :as => "tournament"
   
   match '/opponent_results/:id', :to =>  'users#opponent_results', :as => "opponent_result"
   get '/dash', :to =>  'users#dash', :as => "dash"
   get '/results', :to =>  'users#results', :as => "results"
+  get '/results_by_date', :to =>  'users#results_by_date', :as => "results_by_date"
+  
   get '/my_friends', :to =>  'users#my_friends', :as => "my_friends"
   get '/my_profile', :to =>  'users#profile', :as => "profile"
   get '/step_2', :to =>  'users#step2', :as => "step2"
 
   get '/loading', :to =>  'static_pages#loading', :as => "loading"
+  get '/privacy', :to =>  'static_pages#privacy', :as => "privacy"
 
   match '/destroy_user', :to => "users#destroy_old", :as => "destroy_old", :via => :delete
 

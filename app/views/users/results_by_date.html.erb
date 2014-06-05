@@ -1,0 +1,160 @@
+<div class="container" align="center">
+	<div class="dash-title">
+		<%=@player.real_name %>'s Results and Rankings
+	</div>
+	<div class="profile-info">
+			<div class="row info-row">
+				<div class="col-md-5">
+					<div class="profile-img">
+						<% if @player.image.url %>
+							<img src="<%=@player.image%>">
+						<% else %>
+							<img src="/assets/blank_profile.png">
+						<% end %>
+					</div>
+				</div>
+				<div class="col-md-7" align="left">
+					<div class="opponent-detail-box">
+						<div class="opponent-details">
+							Location: <span class="emp"><%= @player.location %></span>
+						</div>
+						<div class="opponent-details">
+							Overall Record: <span class="emp"><%= @player.overall_record %></span>
+						</div>
+						<div class="opponent-details">
+							Date Range: 
+							<% if @player.birthday %>
+								<span class="emp"><%= @player.birthday.strftime("%m/%d/%Y") %> - Present</span>
+							<% else %>
+								<span class="emp">01/01/2004 - Present</span>
+							<% end %>								
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-3">
+			<span class="toggle-active">Sort by Date</span>
+		</div>
+		<div class="col-md-3">
+			<a href="<%=results_path%>" class="toggle">Sort by Opponent</a>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+
+	<% @all_my_matches.each do |match| %>
+		<div class="profile-info">
+			<% if match.score %>
+				<div class="match-box">
+					<div class="row score-box">
+						<a href="<%=match.link%>" target="_blank"><%= match.name %></a> <% if match.doubles %> <span> - Doubles </span> <% end %>
+					</div>
+					<div class="row score-box">
+						<%= match.date %>
+					</div>
+					<table class="scoring-table">
+						<tr>
+							<td>
+								<%=@player.real_name%>
+								<% if match.player == @player %>
+									<% if match.result == "Win" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
+								<% end %>
+							</td>
+							<% if match.score.include? ';' %>
+									<% match.score.split(';').first(3).each do |score| %>
+										<td>
+											<% if match.player == @player %>
+												<% if match.result == "Win" %>
+													<%= score.split('-').first %>
+												<% else %>
+													<%= score.split('-').last %>
+												<% end %>	
+											<% elsif match.opponent == @player %>
+												<% if match.result == "Win" %>
+													<%= score.split('-').last %>
+												<% else %>
+													<%= score.split('-').first %>
+												<% end %>
+											<% end %>
+										</td>
+									<% end %>
+							<% else %>
+								<td>
+									<% if match.player == @player %>
+										<% if match.result == "Win" %>
+											<%= match.score.split('-').first %>
+										<% else %>
+											<%= match.score.split('-').last %>
+										<% end %>
+									<% elsif match.opponent == @player %>
+										<% if match.result == "Win" %>
+											<%= score.split('-').last %>
+										<% else %>
+											<%= score.split('-').first %>
+										<% end %>
+									<% end %>
+								</td>
+							<% end %>
+						</tr>
+						<tr>
+							<td>
+								<% if match.player == @player %>
+									<%= match.opponent.real_name %> <% if match.doubles %> <span>/ <%= match.doubles %> </span> <% end %>
+									<% if match.result == "Loss" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
+								<% elsif match.opponent == @player %>
+									<%= match.player.real_name %> <% if match.doubles %> <span>/ <%= match.doubles %> </span> <% end %>
+									<% if match.result == "Win" %>
+										<span><img src="/assets/check.png" class="win-check"></span>
+									<% end %>
+								<% end %>
+							</td>
+							<% if match.score.include? ';' %>
+								<% match.score.split(';').first(3).each do |score| %>
+									<td>
+										<% if match.player == @player %>
+											<% if match.result == "Win" %>
+												<%= score.split('-').last %>
+											<% else %>
+												<%= score.split('-').first %>
+											<% end %>
+										<% elsif match.opponent == @player %>
+											<% if match.result == "Win" %>
+													<%= score.split('-').first %>
+											<% else %>
+													<%= score.split('-').last %>
+											<% end %>
+										<% end %>
+									</td>
+								<% end %>
+							<% else %>
+								<td>
+									<% if match.player == @player %>
+										<% if match.result == "Win" %>
+											<%= match.score.split('-').last %>
+										<% else %>
+											<%= match.score.split('-').first %>
+										<% end %>
+									<% elsif match.opponent == @player %>
+										<% if match.result == "Win" %>
+											<%= score.split('-').first %>
+										<% else %>
+											<%= score.split('-').last %>
+										<% end %>
+									<% end %>
+								</td>
+							<% end %>
+						</tr>
+					</table>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>

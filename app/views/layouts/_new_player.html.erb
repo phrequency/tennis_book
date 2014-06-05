@@ -1,0 +1,29 @@
+<div class="modal fade" id="newPlayermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="modal-title">Add a new player to your account</div>
+      </div>
+      <div class="modal-body" align="center">
+      		<%= form_tag(:action => "add_new_player", :controller => "users") do %>
+			  <div class="row">
+			  	<div><%= label_tag :first_name, "Player First Name" %><br />
+			  		<%= text_field_tag :first_name %></div>
+			  </div>
+			  <div class="row">
+			  	<div><%= label_tag :last_name, "Player Last Name" %><br />
+			  		<%= text_field_tag :last_name %></div>
+			  </div>
+			  <div class="row">
+			  	<div><%= label_tag :usta_id, "Player USTA #" %><br />
+			  	<%= text_field_tag :usta_id %></div>
+			  </div>
+			  <div class="row">
+			  	<%= submit_tag "Add New Player", :class => "new-player" %>
+			  </div>
+			<% end %>
+      </div>
+    </div>
+  </div>
+</div>

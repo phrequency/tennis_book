@@ -1,0 +1,102 @@
+<div class="container" align="center">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="my-tournaments-title">
+				Tournaments I Added
+			</div>
+			<% @my_tournaments.each do |tournament| %>
+				<div class="my-tournament">
+					<div>
+						<%= tournament.name %> - <%= tournament.location %>
+					</div>
+					<div>
+						<%= tournament.date.strftime("%m-%d-%Y") %>
+					</div>
+					<div>
+						<a href="<%=tournament_path(tournament)%>">See/Edit Details</a>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-md-8 tourn-right">
+			<div class="my-tournaments-title">
+				Add a New Tournament
+			</div>
+			<%= form_for @tournament do |f| %>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :name, "Tournament Name" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.text_field :name %>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :location, "Tournament Location" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.text_field :location %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :player_1, "Player 1 Name" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.text_field :player_1 %>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :player_2, "Player 2 Name" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.text_field :player_2 %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :result, "Result (win,loss,etc)" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.text_field :result %>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :score, "Score (ex. 6-2)" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.text_field :score %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :comments, "Additional Notes/Comments" %>
+							<div>
+								<%= f.text_area :comments, rows: 5, cols: 30 %>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="enter-new-tournament">
+							<%= f.label :date, "Tournament Date" %><span class="required-field">&#42;</span>
+							<div>
+								<%= f.datetime_select :date, :discard_hour => true, :discard_minutes => true %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%= f.submit %>
+			<% end %>
+		</div>
+	</div>
+</div>

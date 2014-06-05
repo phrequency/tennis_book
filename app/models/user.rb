@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -111,6 +111,7 @@ class User < ActiveRecord::Base
               elsif !player && !account
                 my_player = Player.create(:usta_id => id, :user_usta_id => self.usta_id, :name => last_name.downcase + ', ' + first_name.downcase)
                 my_account = Account.create(user_id: self.id, player_id: my_player.id, active: "true")
+                my_player.delay(run_at: 24.hours.from_now, priority: 10).periodic_update_usta_results
               
 
                 url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
@@ -118,7 +119,7 @@ class User < ActiveRecord::Base
                 params = {
                   "Type" => "Ranking",
                   "__EVENTTARGET" => "ctl00_mainContent_PlayerRecord_UpdatePanel",
-                  "__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=1/1/2002&EndDt=#{end_date}&PlayerID=#{id}=="
+                  "__EVENTARGUMENT" => "Sender=lbtViewPlayerRecords&StartDt=1/1/2013&EndDt=#{end_date}&PlayerID=#{id}=="
                 }
 
                 headers = {
@@ -161,6 +162,7 @@ class User < ActiveRecord::Base
                     detail = {}
                     [
                       [:opponent, 'td[3]/a/text()'],
+                      [:doubles, 'td[3]/a[last()]/text()'],
                       [:opponent_usta_id, 'td[3]/a'],
                       [:result, 'td[2]/text()'],
                       [:score, 'td[4]/text()']
@@ -178,7 +180,12 @@ class User < ActiveRecord::Base
                           player.get_other_player_info
                         end
                         unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :score => d[:score]).first || Match.where(:player1_id => player.id, :player2_id => my_player.id, :score => d[:score]).first
-                          Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
+                          if t_name.include? "d)"
+                            t_partner = table.css("td[@colspan='4']").text.split("Name:").last.split('Residence:').first.strip
+                            Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :doubles => d[:doubles], :partner => t_partner, :name => t_name, :link => t_link, :date => t_date)
+                          else
+                            Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
+                          end
                         end
                       end
                     end
@@ -288,6 +295,7 @@ class User < ActiveRecord::Base
             if id = page.body.split("Usta=").last.split("==").first
               if id.length == 22 && id != "H7ZNAjhiACFTWednaxBPsw" && id != "gk+UhKiBtZurGF68gQnTqw"
                 my_player = Player.create(:usta_id => id, :user_usta_id => usta_id, :name => last_name.downcase + ', ' + first_name.downcase)
+                my_player.delay(run_at: 24.hours.from_now, priority: 10).periodic_update_usta_results
                 self.accounts.each do |a|
                   a.active = "false"
                   a.save
@@ -357,6 +365,7 @@ class User < ActiveRecord::Base
           detail = {}
           [
             [:opponent, 'td[3]/a/text()'],
+            [:doubles, 'td[3]/a[last()]/text()'],
             [:opponent_usta_id, 'td[3]/a'],
             [:result, 'td[2]/text()'],
             [:score, 'td[4]/text()']
@@ -374,7 +383,12 @@ class User < ActiveRecord::Base
                 player.get_other_player_info
               end
               unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :score => d[:score]).first || Match.where(:player1_id => player.id, :player2_id => my_player.id, :score => d[:score]).first
-                Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
+                if t_name.include? "d)"
+                  t_partner = table.css("td[@colspan='4']").text.split("Name:").last.split('Residence:').first.strip
+                  Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :doubles => d[:doubles], :partner => t_partner, :name => t_name, :link => t_link, :date => t_date)
+                else
+                  Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
+                end
               end
             end
           end

@@ -1,58 +1,98 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TennisBook</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
-  <%= javascript_include_tag "application", "//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <% if current_user %>
-          <a class="navbar-brand" href="<%=dash_path%>">
-            <img src="/assets/logo.png" class="logo">
-          </a>
-        <% else %>
-          <a class="navbar-brand" href="<%=root_path%>">
-            <img src="/assets/logo.png" class="logo">
-          </a>
-        <% end %>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <% if !current_user %>
-            <li><a href="<%=new_user_session_path%>">Login</a></li>
-          <% else %>
-            <% if current_user.accounts.first %>
-              <li><a href="<%=dash_path%>">Dashboard</a></li>
-              <li><a href="<%=profile_path%>">Player Profile</a></li>
-              <li><a href="<%=destroy_user_session_path%>">Logout</a></li>
-            <% end %>
+  <head>
+    <title>TennisBook</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+    <%= javascript_include_tag "application", "//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <% if current_user %>
+                  <a class="navbar-brand" href="<%=dash_path%>">
+                    <img src="/assets/logo.png" class="logo">
+                  </a>
+                <% else %>
+                  <a class="navbar-brand" href="<%=root_path%>">
+                    <img src="/assets/logo.png" class="logo">
+                  </a>
+                <% end %>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <% if !current_user %>
+                    <li><a href="<%=new_user_session_path%>">Login</a></li>
+                  <% else %>
+                    <% if current_user.accounts.first %>
+                      <li><a href="<%=dash_path%>">Dashboard</a></li>
+                      <li><a href="<%=profile_path%>">Player Profile</a></li>
+                      <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          Switch Accounts <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" align="center">
+                          <% @user.accounts.order(:active).each do |account| %>
+                            <% if account.active == "true" %>
+                                <li class="active-account">Viewing <%= account.player.real_name %>'s dashboard</li>
+                            <% else %>
+                              <%= form_tag(:action => "switch_accounts", :controller => "users") do %>
+                                <%= hidden_field_tag "id", account.id %>
+                                <li><%= submit_tag "View #{account.player.real_name}'s dashboard", :class => "no-format-submit" %></li>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                          <li class="add-new-player-button" data-toggle="modal" data-target="#newPlayermodal">
+                            Add a New Player
+                          </li>
+                        </ul>
+                      </li>
+                      <li data-toggle="modal" data-target="#inviteModal"><a href="#">Invite Friend</a></li>
+                      <li><a href="<%=destroy_user_session_path%>">Logout</a></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+        </nav>
+        <div class="container" align="center">
+          <% if flash[:error] %>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <div id="error" class="alert alert-danger alert-dismissable"><%= flash[:error] %></div>
           <% end %>
-        </ul>
+          <% if flash[:notice] %>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <div id="notice" class="alert alert-warning alert-dismissable"><%= flash[:notice] %></div>
+          <% end %>
+        </div>
+      </div>
+      <div id="content">
+        <%= yield %>
+      </div>      
+      <div id="footer">
+        <div class="container" align="center">
+          <div>
+            &copy; Bari Enterprises, Inc., 2013-2014. All Rights Reserved.
+         </div>
+         <div>
+          United States Patent Pending
+         </div>
+        </div>
       </div>
     </div>
-  </nav>
-  <div class="container" align="center">
-    <% if flash[:error] %>
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <div id="error" class="alert alert-danger alert-dismissable"><%= flash[:error] %></div>
-    <% end %>
-    <% if flash[:notice] %>
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <div id="notice" class="alert alert-warning alert-dismissable"><%= flash[:notice] %></div>
-    <% end %>
-  </div>
-<%= yield %>
-
-</body>
+  </body>
 </html>
+<% if current_user %>
+  <%= render 'layouts/new_player' %>
+  <%= render 'layouts/invite_modal' %>
+<% end %>

@@ -1,54 +1,84 @@
 <div class="container" align="center">
-<br>
-<%= form_for @player do |f| %>
-	      		<div>
-					<%= f.label :birthday %>: 
-					<%= f.date_select :birthday, start_year: 1980 %>
-				</div>
-				<br>
-				<div>
-					<%= f.label :gender %>: 
-					<%= f.radio_button(:gender, "Boy") %>
-					<%= f.label(:gender_boy, "Boy") %>
-					<%= f.radio_button(:gender, "Girl") %>
-					<%= f.label(:gender_girl, "Girl") %>
-				</div>
-				<br>
-				<div>
-					<%= f.email_field :parent_email, placeholder: "Parent Email" %>
-				</div>
-				<hr>
-				<div>
-					<%= f.text_field :hometown, placeholder: "Hometown" %>
-				</div>
-				<div>
-					<%= f.text_field :school, placeholder: "School" %>
-				</div>
-				<div>
-					<%= f.text_field :grade, placeholder: "Grade" %>
-				</div>
-				<hr>
-				<div>
-					<%= f.text_field :racket, placeholder: "Racket" %>
-				</div>
-				<div>
-					<%= f.text_field :strings, placeholder: "Strings" %>
-				</div>
-				<div>
-					<%= f.text_field :shoes, placeholder: "Shoes" %>
-				</div>
-				<div>
-					<%= f.text_field :clothing, placeholder: "Clothing" %>
-				</div>
-				<div>
-					<%= f.label :right_or_left_handed %>: 
-					<%= f.radio_button(:hand, "Right") %>
-					<%= f.label(:hand_right, "Right") %>
-					<%= f.radio_button(:hand, "Left") %>
-					<%= f.label(:hand_left, "Left") %>
-				</div>
-				<%= f.submit "Update Player Profile >>" %>
-			<% end %>
-
+	<a href="<%=dash_path%>"> Skip this step</a>
+	<%= form_for @player, :html => {:multipart => true} do |f| %>
+		<div class="friends-title">
+			Profile Information
+		</div>
+		<div>
+			<%= f.label :birthday %>: 
+			<%= f.date_select :birthday, start_year: 1980 %>
+		</div>
+		<div>
+			<br>
+			<%= f.label :gender %>: 
+			<%= f.radio_button(:gender, "Boy") %>
+			<%= f.label(:gender_boy, "Boy") %>
+			<%= f.radio_button(:gender, "Girl") %>
+			<%= f.label(:gender_girl, "Girl") %>
+		</div>
+		<br>
+		<div>
+			<%= f.label :image , "Profile Picture" %>: 
+			<%= f.file_field :image %>
+		</div>
+		<hr>
+		<div class="friends-title">
+			Background Information
+		</div>
+		<div>
+			<%= f.text_field :hometown, placeholder: "Hometown" %>
+		</div>
+		<div>
+			<%= f.text_field :school, placeholder: "School" %>
+		</div>
+		<div>
+			<%= f.text_field :grade, placeholder: "Grade" %>
+		</div>
+		<div>
+			<%= f.text_field :section, placeholder: "USTA Section/District" %>
+		</div>
+		<div>
+			<%= f.text_field :coach, placeholder: "Coach" %>
+		</div>
+		<div>
+			<%= f.text_field :club, placeholder: "Tennis Club" %>
+		</div>
+		<div>
+			<%= f.text_field :mentor, placeholder: "Mentor(s)" %>
+		</div>
+		<hr>
+		<div class="friends-title">
+			Player Preferences
+		</div>
+		<div>
+			<%= f.text_field :racket, placeholder: "Racket" %>
+		</div>
+		<div>
+			<%= f.text_field :strings, placeholder: "Strings" %>
+		</div>
+		<div>
+			<%= f.text_field :shoes, placeholder: "Shoes" %>
+		</div>
+		<div>
+			<%= f.text_field :clothing, placeholder: "Clothing" %>
+		</div>
+		<div>
+			<%= f.text_field :favorites, placeholder: "Favorite Players" %>
+		</div>
+		<div>
+			<%= f.text_field :colleges, placeholder: "College Preferences" %>
+		</div>
+		<div>
+			<%= f.label :right_or_left_handed %>: 
+			<%= f.radio_button(:hand, "Right") %>
+			<%= f.label(:hand_right, "Right") %>
+			<%= f.radio_button(:hand, "Left") %>
+			<%= f.label(:hand_left, "Left") %>
+		</div>
+		<%= f.submit "Update Player Profile >>" %>
+		<br>
+		<a href="<%=dash_path%>"> or skip this step</a>
+		<br><br><br>
+	<% end %>
 </div>
 

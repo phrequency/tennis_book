@@ -1,13 +1,13 @@
 <div class="container" align="center">
 	<div class="dash-title">
-		<%=@user.active_player.real_name %>'s Results and Rankings
+		<%=@player.real_name %>'s Results and Rankings
 	</div>
 	<div class="profile-info">
 			<div class="row info-row">
 				<div class="col-md-5">
 					<div class="profile-img">
-						<% if @user.active_player.image.url %>
-							<img src="<%=@user.active_player.image%>">
+						<% if @player.image.url %>
+							<img src="<%=@player.image%>">
 						<% else %>
 							<img src="/assets/blank_profile.png">
 						<% end %>
@@ -16,17 +16,34 @@
 				<div class="col-md-7" align="left">
 					<div class="opponent-detail-box">
 						<div class="opponent-details">
-							Location: <span class="emp"><%= @user.active_player.location %></span>
+							Location: <span class="emp"><%= @player.location %></span>
 						</div>
 						<div class="opponent-details">
-							Overall Record: <span class="emp"><%= @user.active_player.overall_record %></span>
+							Overall Record: <span class="emp"><%= @player.overall_record %></span>
 						</div>
 						<div class="opponent-details">
-							Date Range: <span class="emp"><%= @user.active_player.date_range %></span>
+							Date Range: 
+							<% if @player.birthday %>
+								<span class="emp"><%= @player.birthday.strftime("%m/%d/%Y") %> - Present</span>
+							<% else %>
+								<span class="emp">01/01/2004 - Present</span>
+							<% end %>								
 						</div>
 					</div>
 				</div>
 			</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-3">
+			<a href="<%=results_by_date_path%>" class="toggle">Sort by Date</a>
+		</div>
+		<div class="col-md-3">
+			<span class="toggle-active">Sort by Opponent</span>
+		</div>
+		<div class="col-md-3">
+		</div>
 	</div>
 
 	<% @players_i_played.each do |player| %>
@@ -34,12 +51,12 @@
 			<div class="sub-dash-title">
 				<%=@player.real_name %> vs. <%= player.real_name %>
 			</div>
-			<% if Match.where(player1_id: @user.active_player.id, player2_id: player.id) != [] %>
-				<% Match.where(player1_id: @user.active_player.id, player2_id: player.id).each do |match| %>
+			<% if Match.where(player1_id: @player.id, player2_id: player.id) != [] %>
+				<% Match.where(player1_id: @player.id, player2_id: player.id).each do |match| %>
 					<% if match.score %>
 						<div class="match-box">
 							<div class="row score-box">
-								<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+								<a href="<%=match.link%>" target="_blank"><%= match.name %></a><% if match.doubles %> <span> - Doubles </span> <% end %>
 							</div>
 							<div class="row score-box">
 								<%= match.date %>
@@ -74,7 +91,7 @@
 								</tr>
 								<tr>
 									<td>
-										<%= player.real_name %>
+										<%= player.real_name %> <% if match.doubles %> <span>/ <%= match.doubles %> </span> <% end %>
 										<% if match.result == "Loss" %>
 											<span><img src="/assets/check.png" class="win-check"></span>
 										<% end %>
@@ -112,12 +129,12 @@
 			<div class="sub-dash-title">
 				<%=@player.real_name %> vs. <%= player.real_name %>
 			</div>
-			<% if Match.where(player1_id: player.id, player2_id: @user.active_player.id) != [] %>
-				<% Match.where(player1_id: player.id, player2_id: @user.active_player.id).each do |match| %>
+			<% if Match.where(player1_id: player.id, player2_id: @player.id) != [] %>
+				<% Match.where(player1_id: player.id, player2_id: @player.id).each do |match| %>
 					<% if match.score %>
 						<div class="match-box">
 							<div class="row score-box">
-								<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+								<a href="<%=match.link%>" target="_blank"><%= match.name %></a><% if match.doubles %> <span> - Doubles </span> <% end %>
 							</div>
 							<div class="row score-box">
 								<%= match.date %>
@@ -152,7 +169,7 @@
 								</tr>
 								<tr>
 									<td>
-										<%= player.real_name %>
+										<%= player.real_name %> <% if match.doubles %> <span>/ <%= match.doubles %> </span> <% end %>
 										<% if match.result == "Win" %>
 											<span><img src="/assets/check.png" class="win-check"></span>
 										<% end %>

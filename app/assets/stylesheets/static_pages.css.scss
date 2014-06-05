@@ -23,8 +23,44 @@ $green: #00C322;
     src: url('Nexa Bold.otf'); 
 }
 
-body {
+body, html {
 	font-family: "Nexa Light" !important;
+    height: 100%;
+    min-height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+#content {
+    padding:10px;
+    padding-bottom:80px;
+}
+
+#footer {
+    padding: 30px;
+    background: #CCC;
+    width:100%;
+    height:80px;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+.dropdown-menu {
+    padding: 15px !important;
+}
+
+.active-account {
+    color: $orange !important;
+}
+
+.dropdown-menu li {
+    padding-top: 5px;
 }
 
 .logo{
@@ -33,8 +69,9 @@ body {
 
 .navbar {
     background: white !important;
-    opacity: 0.8;
     border-radius: 0px !important;
+    z-index: 1000;
+    position: relative;
 }
 
 .nav {
@@ -62,7 +99,7 @@ button.close {
     padding: 10px !important;
 }
 
-input[type="submit"]{
+input[type="submit"], .submit-button {
     border: none;
     padding: 12px 30px;
     margin: 15px;
@@ -70,9 +107,10 @@ input[type="submit"]{
     background: $orange; 
     color: white;
     font-size: 16px;
+    cursor: pointer;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .submit-button:hover {
     background: $lightorange;
 }
 
