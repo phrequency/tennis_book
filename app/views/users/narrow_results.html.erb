@@ -1,9 +1,11 @@
 <div class="container" align="center">
-	<% if @results %>
+	<% if @results != [] %>
 		<% @results.each do |result| %>
 			<div>
 				<a href="<%=opponent_result_path(result)%>"><%= result.real_name %> - <%= result.location %></a>
 			</div>
 		<% end %>
+	<% else %>
+		Sorry, no players by that name were found.
 	<% end %>
 </div>

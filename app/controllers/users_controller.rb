@@ -29,6 +29,8 @@ class UsersController < ApplicationController
 		@player = current_user.active_player
 		@players_i_played = Player.find_all_by_id(@user.active_player.own_matches.sort.map(&:player2_id)).sort_by(&:name)
 		@players_played_me = Player.find_all_by_id(@user.active_player.other_matches.sort.map(&:player1_id)).sort_by(&:name)
+
+		@specials = ['ns', 'Wo']
 	end
 
 	def results_by_date
@@ -37,6 +39,8 @@ class UsersController < ApplicationController
 		@own_matches = @user.active_player.own_matches
 		@other_matches = @user.active_player.other_matches
 		@all_my_matches = (@own_matches + @other_matches).sort#_by{|h| h[:real_datetime]}
+
+		@specials = ['ns', 'Wo']
 	end
 
 	def my_friends
@@ -75,10 +79,11 @@ class UsersController < ApplicationController
 	def opponent_results
 		@user = current_user
 		@player = @user.active_player
+		@specials = ['ns', 'Wo']
 		@opponent = Player.find(params[:id])
 			if @opponent
-				@own_matches_against_me = @opponent.all_matches.where('player2_id = :player_id', player_id: @user.active_player.id)
-				@other_matches_against_me = @opponent.all_matches.where('player1_id = :player_id', player_id: @user.active_player.id)
+				@own_matches_against_me = @opponent.all_matches.where('player2_id = :player_id', player_id: @player.id)
+				@other_matches_against_me = @opponent.all_matches.where('player1_id = :player_id', player_id: @player.id)
 				
 				@my_friendships = @player.friends
 				@my_friend_ids = []
@@ -91,8 +96,8 @@ class UsersController < ApplicationController
 				@friend_own_matches = @opponent.all_matches.where('player1_id IN (:players) AND player2_id = :opponent_id', opponent_id: @opponent.id, players: @my_friend_ids)
 				@friend_other_matches = @opponent.all_matches.where('player1_id = :opponent_id AND player2_id IN (:players)', opponent_id: @opponent.id, players: @my_friend_ids)
 
-				@my_opponent_ids_other = Player.find_all_by_id(@user.active_player.other_matches.map(&:player1_id)).map(&:id)
-				@my_opponent_ids_own = Player.find_all_by_id(@user.active_player.own_matches.map(&:player2_id)).map(&:id)
+				@my_opponent_ids_other = @player.other_matches.map(&:player1_id)
+				@my_opponent_ids_own = @player.own_matches.map(&:player2_id)
 
 				if @my_opponent_ids_own && @my_friend_ids
 					@my_opponent_ids_own = @my_opponent_ids_own - @my_friend_ids

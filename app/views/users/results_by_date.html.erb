@@ -88,7 +88,11 @@
 								<td>
 									<% if match.player == @player %>
 										<% if match.result == "Win" %>
-											<%= match.score.split('-').first %>
+											<% if @specials.any? { |s| match.score.include?(s) } %>
+												- 
+											<% else %>
+												<%= match.score.split('-').first %>
+											<% end %>
 										<% else %>
 											<%= match.score.split('-').last %>
 										<% end %>
@@ -96,7 +100,11 @@
 										<% if match.result == "Win" %>
 											<%= score.split('-').last %>
 										<% else %>
-											<%= score.split('-').first %>
+											<% if @specials.any? { |s| match.score.include?(s) } %>
+												- 
+											<% else %>
+												<%= score.split('-').first %>
+											<% end %>
 										<% end %>
 									<% end %>
 								</td>
@@ -140,11 +148,19 @@
 										<% if match.result == "Win" %>
 											<%= match.score.split('-').last %>
 										<% else %>
-											<%= match.score.split('-').first %>
+											<% if @specials.any? { |s| match.score.include?(s) } %>
+												- 
+											<% else %>
+												<%= match.score.split('-').first %>
+											<% end %>
 										<% end %>
 									<% elsif match.opponent == @player %>
 										<% if match.result == "Win" %>
-											<%= score.split('-').first %>
+											<% if @specials.any? { |s| match.score.include?(s) } %>
+												- 
+											<% else %>
+												<%= score.split('-').first %>
+											<% end %>
 										<% else %>
 											<%= score.split('-').last %>
 										<% end %>

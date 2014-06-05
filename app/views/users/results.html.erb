@@ -82,7 +82,11 @@
 									<% else %>
 										<td>
 											<% if match.result == "Win" %>
-												<%= match.score.split('-').first %>
+												<% if @specials.any? { |s| match.score.include?(s) } %>
+													- 
+												<% else %>
+													<%= match.score.split('-').first %>
+												<% end %>
 											<% else %>
 												<%= match.score.split('-').last %>
 											<% end %>
@@ -111,7 +115,11 @@
 											<% if match.result == "Win" %>
 												<%= match.score.split('-').last %>
 											<% else %>
-												<%= match.score.split('-').first %>
+												<% if @specials.any? { |s| match.score.include?(s) } %>
+													- 
+												<% else %>
+													<%= match.score.split('-').first %>
+												<% end %>
 											<% end %>
 										</td>
 									<% end %>
@@ -160,7 +168,11 @@
 									<% else %>
 										<td>
 											<% if match.result == "Loss" %>
-												<%= match.score.split('-').first %>
+												<% if @specials.any? { |s| match.score.include?(s) } %>
+													- 
+												<% else %>
+													<%= match.score.split('-').first %>
+												<% end %>
 											<% else %>
 												<%= match.score.split('-').last %>
 											<% end %>
@@ -187,7 +199,11 @@
 									<% else %>
 										<td>
 											<% if match.result == "Win" %>
-												<%= match.score.split('-').first %>
+												<% if @specials.any? { |s| match.score.include?(s) } %>
+													- 
+												<% else %>
+													<%= match.score.split('-').first %>
+												<% end %>
 											<% else %>
 												<%= match.score.split('-').last %>
 											<% end %>
