@@ -98,17 +98,12 @@ class UsersController < ApplicationController
 
 				@my_opponent_ids_other = @player.other_matches.map(&:player1_id)
 				@my_opponent_ids_own = @player.own_matches.map(&:player2_id)
+				@all_my_opponent_ids = @my_opponent_ids_other + @my_opponent_ids_own
 
-				if @my_opponent_ids_own && @my_friend_ids
-					@my_opponent_ids_own = @my_opponent_ids_own - @my_friend_ids
-				end
+				@people_ive_played = @all_my_opponent_ids - @my_friend_ids
 
-				if @my_opponent_ids_other && @my_friend_ids
-					@my_opponent_ids_other = @my_opponent_ids_other - @my_friend_ids
-				end
-
-				@opponent_matches_other = Match.where('player1_id = :opponent_id AND player2_id IN (:players)', opponent_id: @opponent.id, players: @my_opponent_ids_other)
-				@opponent_matches_own = Match.where('player1_id IN (:players) AND player2_id = :opponent_id', opponent_id: @opponent.id, players: @my_opponent_ids_own)
+				@opponent_matches_other = @opponent.own_matches.where('player2_id IN (:players)', players: @people_ive_played)
+				@opponent_matches_own = @opponent.other_matches.where('player1_id IN (:players)', players: @people_ive_played)
 			end
 	end
 
