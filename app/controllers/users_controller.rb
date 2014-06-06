@@ -104,6 +104,7 @@ class UsersController < ApplicationController
 
 				@opponent_matches_other = @opponent.own_matches.where('player2_id IN (:players)', players: @people_ive_played)
 				@opponent_matches_own = @opponent.other_matches.where('player1_id IN (:players)', players: @people_ive_played)
+
 			end
 	end
 

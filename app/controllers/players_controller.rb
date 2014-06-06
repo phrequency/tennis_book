@@ -25,5 +25,11 @@ class PlayersController < ApplicationController
     end
   end
 
+  def opponent_profile
+    @opponent = Player.find(params[:id])
+    @user = current_user
+    @player = @user.active_player
+  end
+
 
 end

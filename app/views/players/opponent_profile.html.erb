@@ -1,0 +1,85 @@
+<div class="container" align="center">
+	<div class="profile-info">
+		<div class="row info-row">
+			<div class="col-md-4">
+				<div class="dash-title">
+					<%= @opponent.real_name %> 
+				</div>
+				<div class="profile-img">
+					<% if @opponent.image.url %>
+						<img src="<%=@opponent.image%>">
+					<% else %>
+						<img src="/assets/blank_profile.png">
+					<% end %>
+				</div>
+				<br>
+				<div class="opponent-details">
+					<span class="emp"><a href="<%=opponent_result_path(@opponent)%>">View Player Record</a></span>
+				</div>
+				<br>
+			</div>
+			<div class="col-md-8" align="center">
+				<div class="dash-title">
+					Player Profile
+				</div>
+				<div class="opponent-detail-box">
+					<div class="opponent-details">
+						Location: <span class="emp"><%= @opponent.location %></span>
+					</div>
+					<div class="opponent-details">
+							Overall Record: <span class="emp"><%= @opponent.overall_record %></span>
+					</div>
+					<div class="opponent-details">
+						Date Range: <span class="emp"><%= @opponent.date_range %></span>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.birthday %>Age: <span class="emp"><%= @opponent.age %></span><% end %>
+					</div>
+					<br><br>
+					<div class="opponent-details">
+						<% if @opponent.hometown %>Hometown: <span class="emp"><%= @opponent.hometown %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.school %>School: <span class="emp"><%= @opponent.school %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.grade %>Grade: <span class="emp"><%= @opponent.grade %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.section %>Section/District: <span class="emp"><%= @opponent.section %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.club %>Tennis Club: <span class="emp"><%= @opponent.club %></span><% end %>
+					</div>
+					<br><br>
+					<div class="opponent-details">
+						<% if @opponent.racket %>Racket: <span class="emp"><%= @opponent.racket %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.strings %>Strings: <span class="emp"><%= @opponent.strings %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.shoes %>Shoes: <span class="emp"><%= @opponent.shoes %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.clothing %>Clothing: <span class="emp"><%= @opponent.clothing %></span><% end %>
+					</div>
+					<br><br>
+					<div class="opponent-details">
+						<% if @opponent.favorites %>Favorite Players: <span class="emp"><%= @opponent.favorites %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.coach %>Coach: <span class="emp"><%= @opponent.coach %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.mentor %>Mentor(s): <span class="emp"><%= @opponent.mentor %></span><% end %>
+					</div>
+					<div class="opponent-details">
+						<% if @opponent.colleges %>College Choices: <span class="emp"><%= @opponent.colleges %></span><% end %>
+					</div>
+					<br><br><br><br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

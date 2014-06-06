@@ -285,6 +285,8 @@ class User < ActiveRecord::Base
                   account.save
                 else
                   self.get_new_player_usta_data(player.id)
+                  player.user_usta_id = usta_id
+                  player.save
                   account = Account.create(user_id: self.id, player_id: player.id)
                   self.accounts.each do |a|
                     a.active = "false"

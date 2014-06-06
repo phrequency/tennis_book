@@ -34,6 +34,7 @@ TennisBook::Application.routes.draw do
   match '/switch_accounts', :to =>  'users#switch_accounts', :as => "switch_accounts"
 
   post '/send_friend_invite', :to => "players#send_friend_invite", :as => "send_friend_invite"
+  get '/full_profile/:id', :to => "players#opponent_profile", :as => "opponent_profile"
   
   get '/my_tournaments', :to =>  'tournaments#my_tournaments', :as => "my_tournaments"
   get '/tournament/:id', :to =>  'tournaments#edit', :as => "tournament"
