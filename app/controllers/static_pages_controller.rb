@@ -19,6 +19,7 @@ class StaticPagesController < ApplicationController
 	end
 
 	def privacy
+		@user = current_user
 	end
 
 end
