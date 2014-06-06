@@ -159,10 +159,10 @@
 											<% if @specials.any? { |s| match.score.include?(s) } %>
 												- 
 											<% else %>
-												<%= score.split('-').first %>
+												<%= match.score.split('-').first %>
 											<% end %>
 										<% else %>
-											<%= score.split('-').last %>
+											<%= match.score.split('-').last %>
 										<% end %>
 									<% end %>
 								</td>
