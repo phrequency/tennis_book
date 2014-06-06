@@ -98,12 +98,12 @@
 										<% end %>
 									<% elsif match.opponent == @player %>
 										<% if match.result == "Win" %>
-											<%= score.split('-').last %>
+											<%= match.score.split('-').last %>
 										<% else %>
 											<% if @specials.any? { |s| match.score.include?(s) } %>
 												- 
 											<% else %>
-												<%= score.split('-').first %>
+												<%= match.score.split('-').first %>
 											<% end %>
 										<% end %>
 									<% end %>
