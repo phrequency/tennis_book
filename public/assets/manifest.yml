@@ -11,10 +11,12 @@ blank_profile.png: blank_profile-ace303caadaf36d11ebc3dba49b3b35f.png
 blank_profile/index.png: blank_profile-ace303caadaf36d11ebc3dba49b3b35f.png
 check.png: check-f01f20d2f9581d6e34301656f1efba7b.png
 check/index.png: check-f01f20d2f9581d6e34301656f1efba7b.png
+loader.gif: loader-64959c1e5bdae60642f9d2358d845a8b.gif
+loader/index.gif: loader-64959c1e5bdae60642f9d2358d845a8b.gif
 logo.png: logo-e0f31463224b8a12aa997ca6226bcb3f.png
 logo/index.png: logo-e0f31463224b8a12aa997ca6226bcb3f.png
-application.js: application-be8fd55665ede83da3b72122e0326b30.js
-application/index.js: application-be8fd55665ede83da3b72122e0326b30.js
+application.js: application-fd58307bc0c645a1508e062f31d00ea9.js
+application/index.js: application-fd58307bc0c645a1508e062f31d00ea9.js
 application.css: application-bd43cf6e5ecf2a1ab99b95fe5040a274.css
 application/index.css: application-bd43cf6e5ecf2a1ab99b95fe5040a274.css
 jquery.min.map: jquery.min-388372ef65cc311f6a3df4a6ceac8d22.map
