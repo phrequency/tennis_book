@@ -1,16 +1,70 @@
-
 <body class="home-back">
-
-<div class="container" align="center">
-	<div class="join-box">
-		<div class="catch-phrase">
-			Create your profile. Find friends. 
-		</div>
-		<a href="<%=new_user_registration_path%>">
-			<div class="join-button">
-				Join Now >>
+	<div class="container" align="center">
+		<div class="row">
+			<div class="col-md-5" align="left">
+				<div class="catch-phrase">
+					Create a social network of your tennis friends and their friends
+				</div>
+				<div class="home-sub-title">
+					<span><img src="/assets/ball.png" class="ball-bullet"></span> Maintain your historical match play records 
+				</div>
+				<div class="home-sub-title">
+					<span><img src="/assets/ball.png" class="ball-bullet"></span> tournament results and updates
+				</div>
+				<div class="home-sub-title">
+					<span><img src="/assets/ball.png" class="ball-bullet"></span>  Share your tennis news
+				</div>
+				<div class="home-sub-title">
+					<span><img src="/assets/ball.png" class="ball-bullet"></span>  Find a hitting partner
+				</div>
+				<div class="home-sub-title">
+					<span><img src="/assets/ball.png" class="ball-bullet"></span>  Schedule a practice match
+				</div>
 			</div>
-		</a>
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-6" align="left">
+				<div class="catch-phrase">
+					Sign Up:
+				</div>
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+				  <%= devise_error_messages! %>
+				  <div class="row">
+				  	<div class="col-md-6">
+				  		<div><%= f.label :first_name, "Player First Name" %><br />
+				  		<%= f.text_field :first_name %></div>
+				  	</div>
+				  	<div class="col-md-6">
+				  		<div><%= f.label :last_name, "Player Last Name" %><br />
+				  		<%= f.text_field :last_name %></div>
+				  	</div>
+				  </div>
+				  <div class="row">
+				  	<div class="col-md-6">
+				  		<div><%= f.label :usta_id, "Player USTA #" %><br />
+				  		<%= f.text_field :usta_id, data_toggle: "tooltip", title: "Your 10-digit id from the USTA" %></div>
+				  	</div>
+				  	<div class="col-md-6">
+				  		<div><%= f.label :email %><br />
+				  		<%= f.email_field :email, :autofocus => true %></div>
+				  	</div>
+				  </div>
+				  <div class="row">
+				  	<div class="col-md-6">
+				  		<div><%= f.label :password %><br />
+				  		<%= f.password_field :password, data_toggle: "tooltip", title: "A valid password has at least 8 characters" %></div>
+				  	</div>
+				  	<div class="col-md-6">
+				  		<div><%= f.label :password_confirmation, "Confirm your password" %><br />
+				  		<%= f.password_field :password_confirmation, data_toggle: "tooltip", title: "Make sure this matches your pasword" %></div>
+				  	</div>
+				  </div>
+				  <div class="row" align="center">
+				  	&#42; By clicking to sign up, you confirm that you are at least 13 years of age and agree to our <a href="<%=privacy_path%>">Privacy Policy</a>.
+				  </div>
+				  <div align="center"><%= f.submit "Sign up" %></div>
+				<% end %>
+			</div>
+		</div>
 	</div>
-</div>
 </body>

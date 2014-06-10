@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-$black: #313131;
+$black: #000000;
 $orange: #FF7600;
 $lightorange: #FF9840;
 $green: #00C322;
@@ -121,11 +121,7 @@ input[type="submit"]:hover, .submit-button:hover {
 }
 
 .home-back {
-     background: url(bg.png) no-repeat center center fixed; 
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
+     background: #F6F6F6;
 }
 
 .join-box {
@@ -146,10 +142,22 @@ input[type="submit"]:hover, .submit-button:hover {
 }
 
 .catch-phrase {
-    font-size: 26px;
-    padding: 15px 0px 50px 0px;
-    color: $orange;
+    font-family: "Nexa Bold";
+    font-size: 28px;
+    padding: 20px 0px;
+    color: $black;
     line-height: 28px;
+}
+
+.home-sub-title {
+    font-size: 16px;
+    padding: 8px 0px;
+    color: $black;
+}
+
+.ball-bullet {
+    width: 45px;
+    padding: 5px;
 }
 
 
