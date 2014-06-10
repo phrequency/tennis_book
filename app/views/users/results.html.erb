@@ -1,6 +1,6 @@
 <div class="container" align="center">
 	<div class="dash-title">
-		<%=@player.real_name %>'s Results and Rankings
+		<%=@player.real_name %>'s <br> Results and Rankings
 	</div>
 	<div class="profile-info">
 			<div class="row info-row">
@@ -17,6 +17,9 @@
 					<div class="opponent-detail-box">
 						<div class="opponent-details">
 							Location: <span class="emp"><%= @player.location %></span>
+						</div>
+						<div class="opponent-details">
+							USTA Section: <span class="emp"><%= @player.section %></span>
 						</div>
 						<div class="opponent-details">
 							Overall Record: <span class="emp"><%= @player.overall_record %></span>

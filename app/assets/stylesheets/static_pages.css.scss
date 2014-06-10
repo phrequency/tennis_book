@@ -7,6 +7,8 @@ $black: #000000;
 $orange: #FF7600;
 $lightorange: #FF9840;
 $green: #00C322;
+$lightblue: #5790D0;
+$blue: #245fa1;
 
 @font-face {
     font-family: 'Montreal';
@@ -104,14 +106,14 @@ input[type="submit"], .submit-button {
     padding: 12px 30px;
     margin: 15px;
     border-radius: 3px;
-    background: $orange; 
+    background: $blue; 
     color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
 input[type="submit"]:hover, .submit-button:hover {
-    background: $lightorange;
+    background: $lightblue;
 }
 
 .devise-title {
