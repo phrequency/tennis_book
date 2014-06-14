@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140605160404) do
+ActiveRecord::Schema.define(:version => 20140614194729) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20140605160404) do
     t.string   "mentor"
     t.string   "coach"
     t.text     "colleges"
+    t.string   "district"
   end
 
   add_index "players", ["user_id"], :name => "index_players_on_user_id"

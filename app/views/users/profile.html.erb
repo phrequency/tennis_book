@@ -43,7 +43,7 @@
 						Login Email: <span class="emp"><%= @user.email %></span>
 					</div>
 					<div class="account-info">
-						<%= f.date_select :birthday, start_year: 1980 %>
+						Birthday: <%= f.date_select :birthday, start_year: 1980 %>
 					</div>
 					<div class="account-info">
 						<div class="">
@@ -63,35 +63,64 @@
 					<hr>
 					<div class="account-info">
 						<div class="">
+							<%= f.label :hometown, "Hometown" %>
+						</div>
+						<div class="">
 							<%= f.text_field :hometown, placeholder: "Hometown" %>
 						</div>
 					</div>
 					<div class="account-info">
+						<div class="">
+							<%= f.label :school, "School" %>
+						</div>
 						<div class="">
 							<%= f.text_field :school, placeholder: "School" %>
 						</div>
 					</div>
 					<div class="account-info">
 						<div class="">
+							<%= f.label :grade, "Grade" %>
+						</div>
+						<div class="">
 							<%= f.text_field :grade, placeholder: "Grade" %>
 						</div>
 					</div>
 					<div class="account-info">
 						<div class="">
-							<%= f.text_field :section, placeholder: "USTA Section/District" %>
+							<%= f.label :section, "USTA Section" %>
+						</div>
+						<div class="">
+							<%= f.select :section, options_for_select(usta_sections, selected: @player.section), {}, :onchange => 'this.form.submit()' %>
 						</div>
 					</div>
 					<div class="account-info">
+						<div class="">
+							<%= f.label :district, "USTA District" %>
+						</div>
+						<div class="">
+							<%= f.select :district, options_for_select(usta_districts(@player.section), selected: @player.district) %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :coach, "Coach" %>
+						</div>
 						<div class="">
 							<%= f.text_field :coach, placeholder: "Coach" %>
 						</div>
 					</div>
 					<div class="account-info">
 						<div class="">
+							<%= f.label :club, "Tennis Club" %>
+						</div>
+						<div class="">
 							<%= f.text_field :club, placeholder: "Tennis Club" %>
 						</div>
 					</div>
 					<div class="account-info">
+						<div class="">
+							<%= f.label :mentor, "Mentor(s)" %>
+						</div>
 						<div class="">
 							<%= f.text_field :mentor, placeholder: "Mentor(s)" %>
 						</div>
@@ -103,43 +132,61 @@
 					<hr>
 					<div class="account-info">
 						<div class="">
+							<%= f.label :racket, "Racket" %>
+						</div>
+						<div class="">
 							<%= f.text_field :racket, placeholder: "Racket" %>
 						</div>
 					</div>
 					<div class="account-info">
+						<div class="">
+							<%= f.label :strings, "Strings" %>
+						</div>
 						<div class="">
 							<%= f.text_field :strings, placeholder: "Strings" %>
 						</div>
 					</div>
 					<div class="account-info">
 						<div class="">
+							<%= f.label :shoes, "Shoes" %>
+						</div>
+						<div class="">
 							<%= f.text_field :shoes, placeholder: "Shoes" %>
 						</div>
 					</div>
 					<div class="account-info">
+						<div class="">
+							<%= f.label :clothing, "Clothing" %>
+						</div>
 						<div class="">
 							<%= f.text_field :clothing, placeholder: "Clothing" %>
 						</div>
 					</div>
 					<div class="account-info">
 						<div class="">
+							<%= f.label :favorites, "Favorite Players" %>
+						</div>
+						<div class="">
 							<%= f.text_field :favorites, placeholder: "Favorite Players" %>
 						</div>
 					</div>
 					<div class="account-info">
+						<div class="">
+							<%= f.label :colleges, "College Preferences" %>
+						</div>
 						<div class="">
 							<%= f.text_field :colleges, placeholder: "College Preferences" %>
 						</div>
 					</div>
 					<div class="account-info">
 						<div class="">
-							<%= f.radio_button(:hand, "Right") %>
-							<%= f.label(:hand_right, "Right") %>
-							<%= f.radio_button(:hand, "Left") %>
-							<%= f.label(:hand_left, "Left") %>
+							<%= f.label :hand, "Handed" %>
+						</div>
+						<div class="">
+							<%= f.select :hand, options_for_select(["Right-Handed", "Left-Handed"]), :prompt => 'Select One' %>
 						</div>
 					</div>
-				<%= f.submit %>
+				<%= f.submit "Update", :class => "blue-submit" %>
 				</div>
 			<% end %>
 		</div>
@@ -163,66 +210,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="editInfomodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="modal-title">Edit Account Info</div>
-      </div>
-      <div class="modal-body" align="left">
-      	<%= form_for @player do |f| %>
-      		<div>
-				<%= f.label :birthday %>: 
-				<%= f.date_select :birthday, start_year: 1980 %>
-			</div>
-			<br>
-			<div>
-				<%= f.label :gender %>: 
-				<%= f.radio_button(:gender, "Boy") %>
-				<%= f.label(:gender_boy, "Boy") %>
-				<%= f.radio_button(:gender, "Girl") %>
-				<%= f.label(:gender_girl, "Girl") %>
-			</div>
-			<br>
-			<hr>
-			<div>
-				<%= f.text_field :hometown, placeholder: "Hometown" %>
-			</div>
-			<div>
-				<%= f.text_field :school, placeholder: "School" %>
-			</div>
-			<div>
-				<%= f.text_field :grade, placeholder: "Grade" %>
-			</div>
-			<hr>
-			<div>
-				<%= f.text_field :racket, placeholder: "Racket" %>
-			</div>
-			<div>
-				<%= f.text_field :strings, placeholder: "Strings" %>
-			</div>
-			<div>
-				<%= f.text_field :shoes, placeholder: "Shoes" %>
-			</div>
-			<div>
-				<%= f.text_field :clothing, placeholder: "Clothing" %>
-			</div>
-			<div>
-				<%= f.label :right_or_left_handed %>: 
-				<%= f.radio_button(:hand, "Right") %>
-				<%= f.label(:hand_right, "Right") %>
-				<%= f.radio_button(:hand, "Left") %>
-				<%= f.label(:hand_left, "Left") %>
-			</div>
-			<%= f.submit %>
-		<% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 <script type="text/javascript">
 	$('.edit-pic-box').hover(
@@ -232,4 +219,10 @@
 	    $('.edit-pic-button').hide();
 	  }
 	);
+</script>
+
+<script type="text/javascript">
+	$('#player_section').change(function(){
+		alert('gi')
+	});
 </script>

@@ -22,59 +22,135 @@
 			<%= f.file_field :image %>
 		</div>
 		<hr>
-		<div class="friends-title">
-			Background Information
-		</div>
-		<div>
-			<%= f.text_field :hometown, placeholder: "Hometown" %>
-		</div>
-		<div>
-			<%= f.text_field :school, placeholder: "School" %>
-		</div>
-		<div>
-			<%= f.text_field :grade, placeholder: "Grade" %>
-		</div>
-		<div>
-			<%= f.text_field :section, placeholder: "USTA Section/District" %>
-		</div>
-		<div>
-			<%= f.text_field :coach, placeholder: "Coach" %>
-		</div>
-		<div>
-			<%= f.text_field :club, placeholder: "Tennis Club" %>
-		</div>
-		<div>
-			<%= f.text_field :mentor, placeholder: "Mentor(s)" %>
-		</div>
-		<hr>
-		<div class="friends-title">
-			Player Preferences
-		</div>
-		<div>
-			<%= f.text_field :racket, placeholder: "Racket" %>
-		</div>
-		<div>
-			<%= f.text_field :strings, placeholder: "Strings" %>
-		</div>
-		<div>
-			<%= f.text_field :shoes, placeholder: "Shoes" %>
-		</div>
-		<div>
-			<%= f.text_field :clothing, placeholder: "Clothing" %>
-		</div>
-		<div>
-			<%= f.text_field :favorites, placeholder: "Favorite Players" %>
-		</div>
-		<div>
-			<%= f.text_field :colleges, placeholder: "College Preferences" %>
-		</div>
-		<div>
-			<%= f.label :right_or_left_handed %>: 
-			<%= f.radio_button(:hand, "Right") %>
-			<%= f.label(:hand_right, "Right") %>
-			<%= f.radio_button(:hand, "Left") %>
-			<%= f.label(:hand_left, "Left") %>
-		</div>
+		<div class="sub-profile-title">
+						Background Information:
+					</div>
+					<hr>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :hometown, "Hometown" %>
+						</div>
+						<div class="">
+							<%= f.text_field :hometown, placeholder: "Hometown" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :school, "School" %>
+						</div>
+						<div class="">
+							<%= f.text_field :school, placeholder: "School" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :grade, "Grade" %>
+						</div>
+						<div class="">
+							<%= f.text_field :grade, placeholder: "Grade" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :section, "USTA Section" %>
+						</div>
+						<div class="">
+							<%= f.select :section, options_for_select(usta_sections, selected: @player.section), {}, :onchange => 'this.form.submit()' %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :district, "USTA District" %>
+						</div>
+						<div class="">
+							<%= f.select :district, options_for_select(usta_districts(@player.section), selected: @player.district) %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :coach, "Coach" %>
+						</div>
+						<div class="">
+							<%= f.text_field :coach, placeholder: "Coach" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :club, "Tennis Club" %>
+						</div>
+						<div class="">
+							<%= f.text_field :club, placeholder: "Tennis Club" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :mentor, "Mentor(s)" %>
+						</div>
+						<div class="">
+							<%= f.text_field :mentor, placeholder: "Mentor(s)" %>
+						</div>
+					</div>
+					<hr>
+					<div class="sub-profile-title">
+						Player Preferences
+					</div>
+					<hr>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :racket, "Racket" %>
+						</div>
+						<div class="">
+							<%= f.text_field :racket, placeholder: "Racket" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :strings, "Strings" %>
+						</div>
+						<div class="">
+							<%= f.text_field :strings, placeholder: "Strings" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :shoes, "Shoes" %>
+						</div>
+						<div class="">
+							<%= f.text_field :shoes, placeholder: "Shoes" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :clothing, "Clothing" %>
+						</div>
+						<div class="">
+							<%= f.text_field :clothing, placeholder: "Clothing" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :favorites, "Favorite Players" %>
+						</div>
+						<div class="">
+							<%= f.text_field :favorites, placeholder: "Favorite Players" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :colleges, "College Preferences" %>
+						</div>
+						<div class="">
+							<%= f.text_field :colleges, placeholder: "College Preferences" %>
+						</div>
+					</div>
+					<div class="account-info">
+						<div class="">
+							<%= f.label :hand, "Handed" %>
+						</div>
+						<div class="">
+							<%= f.select :hand, options_for_select(["Right-Handed", "Left-Handed"]), :prompt => 'Select One' %>
+						</div>
+					</div>
 		<%= f.submit "Update Player Profile >>" %>
 		<br>
 		<a href="<%=dash_path%>"> or skip this step</a>

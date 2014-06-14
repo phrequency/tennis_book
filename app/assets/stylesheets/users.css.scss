@@ -8,7 +8,9 @@ $orange: #FF7600;
 $lightorange: #FF9840;
 $green: #00C322;
 $lightgreen: #38E156;
+$lightblue2: #5790D0;
 $lightblue: #C3EEF4;
+$blue: #245fa1;
 
 /* Dashboard */
 
@@ -97,6 +99,15 @@ $lightblue: #C3EEF4;
 
 .profile-info {
 	margin-top: 15px;
+}
+
+
+.blue-submit {
+ background: $blue !important;   
+}
+
+.blue-submit:hover {
+ background: $lightblue2 !important;   
 }
 
 .toggle {

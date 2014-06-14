@@ -1,7 +1,7 @@
 class Player < ActiveRecord::Base
   attr_accessible :name, :user_id, :usta_id, :location, :overall_record, :date_range, :image, :birthday, :gender, :parent_email
   attr_accessible :hometown, :school, :grade, :racket, :strings, :shoes, :clothing, :hand, :user_usta_id
-  attr_accessible :section, :club, :favorites, :coach, :mentor, :colleges
+  attr_accessible :section, :district, :club, :favorites, :coach, :mentor, :colleges
 
   has_many :accounts
   has_many :users, :through => :accounts
