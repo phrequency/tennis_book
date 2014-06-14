@@ -165,6 +165,7 @@ class User < ActiveRecord::Base
                       [:doubles, 'td[3]/a[last()]/text()'],
                       [:opponent_usta_id, 'td[3]/a'],
                       [:result, 'td[2]/text()'],
+                      [:round, 'td[1]/text()'],
                       [:score, 'td[4]/text()']
                     ].each do |name, xpath|
                       detail[name] = row.at_xpath(xpath).to_s.strip
@@ -182,9 +183,9 @@ class User < ActiveRecord::Base
                         unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :score => d[:score]).first || Match.where(:player1_id => player.id, :player2_id => my_player.id, :score => d[:score]).first
                           if t_name.include? "d)"
                             t_partner = table.css("td[@colspan='4']").text.split("Name:").last.split('Residence:').first.strip
-                            Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :doubles => d[:doubles], :partner => t_partner, :name => t_name, :link => t_link, :date => t_date)
+                            Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :doubles => d[:doubles], :partner => t_partner, :name => t_name, :link => t_link, :date => t_date, :round => d[:round])
                           else
-                            Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
+                            Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date, :round => d[:round])
                           end
                         end
                       end
@@ -370,6 +371,7 @@ class User < ActiveRecord::Base
             [:doubles, 'td[3]/a[last()]/text()'],
             [:opponent_usta_id, 'td[3]/a'],
             [:result, 'td[2]/text()'],
+            [:round, 'td[1]/text()'],
             [:score, 'td[4]/text()']
           ].each do |name, xpath|
             detail[name] = row.at_xpath(xpath).to_s.strip
@@ -387,9 +389,9 @@ class User < ActiveRecord::Base
               unless Match.where(:player1_id => my_player.id, :player2_id => player.id, :score => d[:score]).first || Match.where(:player1_id => player.id, :player2_id => my_player.id, :score => d[:score]).first
                 if t_name.include? "d)"
                   t_partner = table.css("td[@colspan='4']").text.split("Name:").last.split('Residence:').first.strip
-                  Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :doubles => d[:doubles], :partner => t_partner, :name => t_name, :link => t_link, :date => t_date)
+                  Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :doubles => d[:doubles], :partner => t_partner, :name => t_name, :link => t_link, :date => t_date, :round => d[:round])
                 else
-                  Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date)
+                  Match.create(:player1_id => my_player.id, :player2_id => player.id, :result => d[:result], :score => d[:score], :name => t_name, :link => t_link, :date => t_date, :round => d[:round])
                 end
               end
             end

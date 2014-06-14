@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 		@players_i_played = Player.find_all_by_id(@user.active_player.own_matches.sort.map(&:player2_id)).sort_by(&:name)
 		@players_played_me = Player.find_all_by_id(@user.active_player.other_matches.sort.map(&:player1_id)).sort_by(&:name)
 
-		@specials = ['ns', 'Wo']
+		@specials = ['Def', 'Ret', 'Wo', 'Wd', 'WD']
 	end
 
 	def results_by_date
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 		@other_matches = @user.active_player.other_matches
 		@all_my_matches = (@own_matches + @other_matches).sort#_by{|h| h[:real_datetime]}
 
-		@specials = ['ns', 'Wo']
+		@specials = ['Def', 'Ret', 'Wo', 'Wd', 'WD']
 	end
 
 	def my_friends
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
 	def opponent_results
 		@user = current_user
 		@player = @user.active_player
-		@specials = ['ns', 'Wo']
+		@specials = ['Def', 'Ret', 'Wo', 'Wd', 'WD']
 		@opponent = Player.find(params[:id])
 			if @opponent
 				@own_matches_against_me = @opponent.all_matches.where('player2_id = :player_id', player_id: @player.id)

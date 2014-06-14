@@ -36,8 +36,8 @@ url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
                   t_name = table.css("span.event_title/text()").to_s.gsub(/^$\n/, '').strip
                   t_date = table.css("span.event_date/text()").to_s.gsub(/^$\n/, '').strip
                   rows = table.css("tr")
-                  if t_name.include? "d)"
-					  p t_partner = table.css("td[@colspan='4']").text.split("Name:").last.split('Residence:').first.strip
+                  #if t_name.include? "d)"
+					         #p t_partner = table.css("td[@colspan='4']").text.split("Name:").last.split('Residence:').first.strip
 	                  details = rows.collect do |row|
 	                    detail = {}
 	                    [
@@ -45,6 +45,7 @@ url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
 	                      [:doubles, 'td[3]/a[last()]/text()'],
                       	  [:opponent_usta_id, 'td[3]/a'],
 	                      [:result, 'td[2]/text()'],
+                        [:round, 'td[1]/text()'],
 	                      [:score, 'td[4]/text()']
 	                    ].each do |name, xpath|
 	                      detail[name] = row.at_xpath(xpath).to_s.strip
@@ -54,11 +55,11 @@ url = "https://tennislink.usta.com/Tournaments/Rankings/RankingHome.aspx?"
 	                  details.each do |d|
 	                  	unless d[:opponent] == ""
 	                  		p d[:opponent]
-	                  		p d[:doubles]
+	                  		p d[:round]
 	                  		p ">>>>>>>>>>>>>>>>"
 	                  	end
 	                  end
-	              end
+	                #end
                 end
 
 

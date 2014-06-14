@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140614194729) do
+ActiveRecord::Schema.define(:version => 20140614203128) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20140614194729) do
     t.string   "date"
     t.string   "doubles"
     t.string   "partner"
+    t.string   "round"
   end
 
   add_index "matches", ["player1_id"], :name => "index_matches_on_player1_id"
