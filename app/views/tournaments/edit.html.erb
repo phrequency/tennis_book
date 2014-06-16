@@ -1,23 +1,57 @@
 <div class="container" align="center">
-	<%= form_for @tournament do |f| %>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="enter-new-tournament">
-							<%= f.label :name, "Tournament Name" %><span class="required-field">&#42;</span>
-							<div>
-								<%= f.text_field :name %>
-							</div>
-						</div>
+	<div class="row">
+		<div class="col-md-4">
+			<%= form_for @tournament do |f| %>
+				<div class="enter-new-tournament">
+					<%= f.label :name, "Tournament Name" %><span class="required-field">&#42;</span>
+				</div>
+				<div>
+					<%= f.text_field :name %>
+				</div>
+				<div class="enter-new-tournament">
+					<%= f.label :location, "Tournament Location" %><span class="required-field">&#42;</span>
+				</div>
+				<div>
+					<%= f.text_field :location %>
+				</div>
+				<div class="enter-new-tournament">
+					<%= f.label :date, "Tournament Date" %><span class="required-field">&#42;</span>
+				</div>
+				<div>
+					<%= f.datetime_select :date, :discard_hour => true, :discard_minutes => true %>
+				</div>
+				<%= f.submit %>
+			<% end %>
+			<div class="my-tournaments-title">
+				Matches
+			</div>	
+			
+			<% @tournament.tmatches.each do |match| %>
+				<div class="tmatch-data">
+					<div>
+						Player 1 - <%= match.player_1 %>
 					</div>
-					<div class="col-md-6">
-						<div class="enter-new-tournament">
-							<%= f.label :location, "Tournament Location" %><span class="required-field">&#42;</span>
-							<div>
-								<%= f.text_field :location %>
-							</div>
-						</div>
+					<div>
+						Player 2 - <%= match.player_2 %>
+					</div>
+					<div>
+						Result - <%= match.result %>
+					</div>
+					<div>
+						Score - <%= match.score %>
+					</div>
+					<div>
+						Round - <%= match.round %>
 					</div>
 				</div>
+			<% end %>
+		</div>
+		<div class="col-md-8 tourn-right">
+			<div class="my-tournaments-title">
+				Add a match to this tournament
+			</div>
+			<%= form_for @tmatch do |f| %>
+			<%= f.hidden_field :tournament_id, :value => @tournament.id %>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="enter-new-tournament">
@@ -53,25 +87,18 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
 					<div class="col-md-6">
 						<div class="enter-new-tournament">
-							<%= f.label :comments, "Additional Notes/Comments" %>
+							<%= f.label :round, "Round" %><span class="required-field">&#42;</span>
 							<div>
-								<%= f.text_area :comments, rows: 5, cols: 30 %>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="enter-new-tournament">
-							<%= f.label :date, "Tournament Date" %><span class="required-field">&#42;</span>
-							<div>
-								<%= f.datetime_select :date, :discard_hour => true, :discard_minutes => true %>
+								<%= f.text_field :round %>
 							</div>
 						</div>
 					</div>
 				</div>
-				<%= f.submit %>
-	<% end %>	
+				<%= f.submit "Add Match" %>
+			<% end %>
+		</div>
+	</div>
 </div>
+<br><br><br><br>

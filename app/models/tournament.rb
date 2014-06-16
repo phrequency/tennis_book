@@ -4,12 +4,10 @@ class Tournament < ActiveRecord::Base
   belongs_to :player
 
   validates :name, presence: true
-  validates :location, presence: true
-  validates :player_1, presence: true
-  validates :player_2, presence: true
-  validates :result, presence: true
-  validates :score, presence: true
+  validates :location, presence: true 
   validates :date, presence: true
+
+  has_many :tmatches
 
 
 end

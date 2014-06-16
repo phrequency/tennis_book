@@ -90,7 +90,7 @@
 							<%= f.label :section, "USTA Section" %>
 						</div>
 						<div class="">
-							<%= f.select :section, options_for_select(usta_sections, selected: @player.section), {}, :onchange => 'this.form.submit()' %>
+							<%= f.select :section, options_for_select(usta_sections, selected: @player.section) %>
 						</div>
 					</div>
 					<div class="account-info">
@@ -98,7 +98,11 @@
 							<%= f.label :district, "USTA District" %>
 						</div>
 						<div class="">
-							<%= f.select :district, options_for_select(usta_districts(@player.section), selected: @player.district) %>
+							<% if @player.district %>
+								<%= f.select :district, options_for_select(usta_districts(@player.section), selected: @player.district) %>
+							<% else %>
+							<%= f.select :district, options_for_select([]) %>
+							<% end %>
 						</div>
 					</div>
 					<div class="account-info">
@@ -223,6 +227,18 @@
 
 <script type="text/javascript">
 	$('#player_section').change(function(){
-		alert('gi')
+		$("#player_district").empty()
+		var section = $('#player_section :selected').text();
+		var districts = $.ajax({
+	        type: "POST",
+	        dataType: "json",
+	        url: "/get_usta_districts/" + section,
+	        async: false,
+	        success: function(data){}
+	    }).responseText;
+	    options = JSON.parse(districts)
+	    $.each(options, function(key, value) {   
+			$('#player_district').append($("<option></option>").attr("value",value).text(value)); 
+		});
 	});
 </script>

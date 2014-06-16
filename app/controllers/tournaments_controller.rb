@@ -15,7 +15,7 @@ class TournamentsController < ApplicationController
     @tournament = @player.tournaments.build(params[:tournament])
     if @tournament.save
     	flash[:notice] = "Tournament saved!"
-    	redirect_to my_tournaments_path
+    	redirect_to tournament_path(@tournament)
     else
     	flash[:error] = "Please fill out all the required fields"
     	redirect_to my_tournaments_path
@@ -26,6 +26,7 @@ class TournamentsController < ApplicationController
   	@tournament = Tournament.find(params[:id])
   	@user = current_user
     @player = current_user.active_player
+    @tmatch = Tmatch.new
   	unless @tournament.player == @player
   		redirect_to dash_path
   	end

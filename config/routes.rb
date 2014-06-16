@@ -35,9 +35,12 @@ TennisBook::Application.routes.draw do
 
   post '/send_friend_invite', :to => "players#send_friend_invite", :as => "send_friend_invite"
   get '/full_profile/:id', :to => "players#opponent_profile", :as => "opponent_profile"
-  
+  post '/get_usta_districts/:section', :to => "players#get_districts"
+
   get '/my_tournaments', :to =>  'tournaments#my_tournaments', :as => "my_tournaments"
   get '/tournament/:id', :to =>  'tournaments#edit', :as => "tournament"
+
+  post '/tmatches', :to => 'tmatches#create', :as => "tmatches"
   
   match '/opponent_results/:id', :to =>  'users#opponent_results', :as => "opponent_result"
   get '/dash', :to =>  'users#dash', :as => "dash"
