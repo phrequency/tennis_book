@@ -97,8 +97,8 @@ class User < ActiveRecord::Base
 
       page = a.post(url, params, headers)
       unless page.body.include? "Invalid player record"
-        if page.body.split("Usta=").last
-          if id = page.body.split("Usta=").last.split("==").first
+        if page.body.split("Usta_").last
+          if id = page.body.split("Usta_").last.split("%3d").first
             if id.length == 22 && id != "H7ZNAjhiACFTWednaxBPsw" && id != "gk+UhKiBtZurGF68gQnTqw"
               if player = Player.where(:usta_id => id).first
                 account = Account.where(player_id: player.id, user_id: self.id).first
@@ -273,8 +273,8 @@ class User < ActiveRecord::Base
 
       page = a.post(url, params, headers)
       unless page.body.include? "Invalid player record"
-        if page.body.split("Usta=").last
-          if id = page.body.split("Usta=").last.split("==").first
+        if page.body.split("Usta_").last
+          if id = page.body.split("Usta_").last.split("%3d").first
             if id.length == 22 && id != "H7ZNAjhiACFTWednaxBPsw" && id != "gk+UhKiBtZurGF68gQnTqw"
               if player = Player.where(usta_id: id).first
                 if account = Account.where(user_id: self.id, player_id: player.id).first
