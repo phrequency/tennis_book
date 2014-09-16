@@ -98,6 +98,18 @@ input[type="text"],input[type="email"],input[type="password"]{
         border-radius: 3px;
 }
 
+.navbar input[type="email"], .navbar input[type="password"] {
+    height: 30px !important;
+    width: 150px !important;
+    font-size: 12px !important;
+}
+
+.navbar input[type="submit"] {
+    font-size: 12px;
+    padding: 7px 25px;
+
+}
+
 textarea {
     border: solid 1px #CCC;
     border-radius: 3px;

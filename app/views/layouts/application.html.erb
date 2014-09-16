@@ -33,7 +33,13 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                   <% if !current_user %>
-                    <li><a href="<%=new_user_session_path%>">Login</a></li>
+                    <li>
+                      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                        <%= f.email_field :email, :autofocus => true %>
+                        <%= f.password_field :password %>
+                        <%= f.submit "Sign in" %>
+                      <% end %>
+                    </li>
                   <% else %>
                     <% if current_user.accounts.first %>
                       <li><a href="<%=dash_path%>">Dashboard</a></li>
