@@ -76,7 +76,7 @@
 					<% if match.score %>
 						<div class="match-box">
 							<div class="row score-box">
-								<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+								<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 							</div>
 							<div class="row score-box">
 								<%= match.date %>
@@ -159,7 +159,7 @@
 					<% if match.score %>
 							<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>
@@ -243,7 +243,7 @@
 					<% if match.score %>
 						<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>
@@ -324,7 +324,7 @@
 					<% if match.score %>
 						<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>
@@ -407,7 +407,7 @@
 					<% if match.score %>
 						<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>
@@ -488,7 +488,7 @@
 					<% if match.score %>
 						<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>
@@ -579,7 +579,7 @@
 					<% if match.score %>
 						<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>
@@ -658,7 +658,7 @@
 					<% if match.score %>
 						<div class="match-box">
 								<div class="row score-box">
-									<a href="<%=match.link%>" target="_blank"><%= match.name %></a>
+									<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a>
 								</div>
 								<div class="row score-box">
 									<%= match.date %>

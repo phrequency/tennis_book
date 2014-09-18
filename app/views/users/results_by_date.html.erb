@@ -54,13 +54,13 @@
 			<% if match.score %>
 				<div class="match-box">
 					<div class="row score-box">
-						<a href="<%=match.link%>" target="_blank"><%= match.name %></a> <% if match.doubles %> <span> - Doubles </span> <% end %>
+						<a href="<%=match.link%>" target="_blank"><%= match.name.gsub('&amp;', '&') %></a> <% if match.doubles %> <span> - Doubles </span> <% end %>
 					</div>
 					<div class="row score-box">
 						<%= match.date %>
 					</div>
 					<div class="row score-box">
-						Round: <%= match.real_round_name(match.round) %>
+						Round: <%= match.round %>
 					</div>
 					<table class="scoring-table">
 						<tr>
