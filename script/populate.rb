@@ -6,10 +6,10 @@ a.each do |user|
 	last_name = user[:name].split(' ').last
 	if user[:usta_id]
 		usta_id = user[:usta_id]
-	else
-		usta_id = "0123456789"
+		User.create(first_name: first_name, last_name: last_name, email: first_name + "@" + last_name + ".com", password: "11223344", usta_id: usta_id)
+	# else
+	# 	usta_id = "0123456789"
 	end
-	User.create(first_name: first_name, last_name: last_name, email: first_name + "@" + last_name + ".com", password: "11223344", usta_id: usta_id)
 end
 
 # 	# User.find(:all, :conditions => ["id != ?", 256]).each do |f|
