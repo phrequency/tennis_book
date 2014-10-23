@@ -10,6 +10,7 @@ gem 'pg', '0.14.1'
 
 gem 'newrelic_rpm'
 
+gem 'daemons'
 gem 'delayed_job_active_record'
 
 gem 'mechanize'
